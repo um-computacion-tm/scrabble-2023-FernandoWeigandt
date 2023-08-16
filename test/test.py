@@ -1,5 +1,5 @@
 import unittest
-from tiles import *
+from game.tiles import *
 
 class TestTiles(unittest.TestCase):
     def test_tile(self):
@@ -10,20 +10,12 @@ class TestTiles(unittest.TestCase):
 class TileBag(unittest.TestCase):
     def test_tilebag(self):
         tilebag = TileBag()
-        self.assertEqual(tilebag.tiles_remaining(), 0)
+        self.assertEqual(tilebag.tiles_remaining(), 100)
 
-    def test_add_tile(self):
+    def test_draw_tiles(self):
         tilebag = TileBag()
-        tile = Tile('A', 1)
-        tilebag.add_tile(tile)
-        self.assertEqual(tilebag.tiles_remaining(), 1)
-
-    def test_remove_tile(self):
-        tilebag = TileBag()
-        tile = Tile('A', 1)
-        tilebag.add_tile(tile)
-        tilebag.remove_tile(tile)
-        self.assertEqual(tilebag.tiles_remaining(), 0)
+        tilebag.draw_tiles(7)
+        self.assertEqual(tilebag.tiles_remaining(), 93)
 
 
 if __name__ == '__main__':
