@@ -1,5 +1,13 @@
 import random
 
+class TooMuchTiles (Exception):
+    pass
+
+class TooMuchTilesPut(Exception):
+    pass
+
+TOTALTILES=98
+
 class Tile:
     def __init__(self, letter, value):
         self.letter = letter
@@ -40,13 +48,27 @@ class TileBag:
         random.shuffle(self.tiles)
  
     def draw_tiles(self,cantidad):
-        if cantidad>len(self.tiles):
-            raise 'No hay suficientes fichas'
         tile_drawn=[]
-        for i in range(cantidad-1):
-            tile_drawn.append(self.tiles.pop())
-        return tile_drawn
-    
+        try:
+            if cantidad>len(self.tiles):
+                raise TooMuchTiles
+            else:
+                for i in range(cantidad):
+                    tile_drawn.append(self.tiles.pop())
+                return tile_drawn
+        except TooMuchTiles:
+            print('Sacaste mas fichas de las que habian')
+            return tile_drawn
+
+    def put_tiles(self,tiles:list):
+        try:
+            if len(tiles)+len(self.tiles)<=TOTALTILES:
+                self.tiles.extend(tiles)
+            else:
+                raise TooMuchTilesPut
+        except TooMuchTilesPut:
+            print('La bolsa esta llena o hay fichas de mas')
+
     def tiles_remaining(self):
         return len(self.tiles)
 
