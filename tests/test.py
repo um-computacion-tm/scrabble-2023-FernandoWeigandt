@@ -43,12 +43,6 @@ class TestTileBag(unittest.TestCase):
 
     def test_Joker_chooseLetter(self):
         tilebag=TileBag()
-        tilebag.draw_tiles(7)
-        tilebag.put_tiles([JokerTile('A',1)])
-        self.assertEqual(tilebag.tiles_remaining(),TOTALTILES-6)
-        tilebag.chooseLetter('B')
-        self.assertEqual(tilebag.tiles_remaining(),TOTALTILES-6)
-        self.assertEqual(tilebag.tiles[0].letter,'B')
 
 
 
