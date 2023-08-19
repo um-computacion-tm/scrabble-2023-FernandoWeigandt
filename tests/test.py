@@ -42,8 +42,14 @@ class TestTileBag(unittest.TestCase):
         self.assertEqual(tilebag.tiles_remaining(),TOTALTILES-6)
 
     def test_Joker_chooseLetter(self):
-        tilebag=TileBag()
+        jokertile=JokerTile('A',1)
+        jokertile.chooseLetter()
+        self.assertEqual(jokertile.letter,'A')
+        self.assertEqual(jokertile.value,1)
 
+    def test_Joker_chooseLetter_without_letters(self):
+        pass
+        
 
 
 

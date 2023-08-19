@@ -7,6 +7,9 @@ class TooMuchTiles (Exception):
 class TooMuchTilesPut(Exception):
     pass
 
+class EmptyTiles(Exception):
+    pass
+
 TOTALTILES=100
 
 class Tile:
@@ -48,14 +51,27 @@ class TileBag:
         return len(self.tiles)
 
 class JokerTile(Tile):
+    
     def __init__(self, letter, value):
         super().__init__(letter, value)
 
 
-    def chooseLetter(self):
-        tilebag=TileBag()
-        letter_joker=str(input('Elija una letra para el Joker: '))
-        if letter_joker in DATA.get('letter'):
-            self.tiles.replace('?',letter_joker)
+def chooseLetter(self):
+    try:
+        letter_joker = str(input('Elija una letra para el Joker: '))
+        for item in DATA:
+            if item["letter"] == letter_joker.upper():
+                value_joker = item["value"]
+                self.letter = letter_joker.upper()
+                self.value = value_joker
+                return self.letter, self.value
+        else:
+            raise EmptyTiles
+    except EmptyTiles:
+        print('No hay mas fichas')
+        return self.letter, self.value
+                
+
+
             
         

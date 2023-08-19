@@ -6,9 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+
 ## Status
 
-Development.
+- Development.
 
 ## (0.0.1) V 17-08-23
 
@@ -27,9 +29,12 @@ Development.
 
 - Anything at the moment
 
+
+
+
 ## Status
 
-Development.
+- Development.
 
 ## (0.0.2) V 18-08-23
 
@@ -50,3 +55,57 @@ Development.
 ### Issues
 
 - Choose Joker Tile Test. Not working.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.0.2) V 18-08-23
+
+### In Progress
+
+- Test Joker Tile.
+
+### Added
+
+- Joker Tile Class.
+- Diccionary For Tiles.
+- Choose Joker Tile Method.
+
+### Changed
+
+-Tile list change by a for method
+
+### Issues
+
+- Choose Joker Tile Test. Not working.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.0.3) V 19-08-23
+
+### In Progress
+
+- Handling Exceptions of Choose.
+
+### Added
+
+- Choose Joker Tile Method.
+- Test Joker Choose Tile Method.
+- Empty Tile Exception.
+
+### Changed
+
+- Nothing at the moment.
+
+### Issues
+
+- Anything at the moment.
