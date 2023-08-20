@@ -17,6 +17,21 @@ class Tile:
         self.letter = letter
         self.value = value
 
+class JokerTile(Tile):
+    
+    def __init__(self, letter, value):
+        super().__init__(letter, value)
+
+
+    def chooseLetter(self,letter_joker):
+        for i in DATA:
+            if i['letter']==letter_joker.upper():
+                self.letter=letter_joker.upper()
+                self.value=i['value']
+                break
+        else:
+            raise EmptyTiles    
+
 class TileBag:
     def __init__(self):
         self.tiles=[]
@@ -50,27 +65,8 @@ class TileBag:
     def tiles_remaining(self):
         return len(self.tiles)
 
-class JokerTile(Tile):
-    
-    def __init__(self, letter, value):
-        super().__init__(letter, value)
 
 
-def chooseLetter(self):
-    try:
-        letter_joker = str(input('Elija una letra para el Joker: '))
-        for item in DATA:
-            if item["letter"] == letter_joker.upper():
-                value_joker = item["value"]
-                self.letter = letter_joker.upper()
-                self.value = value_joker
-                return self.letter, self.value
-        else:
-            raise EmptyTiles
-    except EmptyTiles:
-        print('No hay mas fichas')
-        return self.letter, self.value
-                
 
 
             

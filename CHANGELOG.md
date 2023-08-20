@@ -7,81 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-
 ## Status
 
 - Development.
 
-## (0.0.1) V 17-08-23
+## (0.0.4) V 20-08-23
 
 ### Added
 
-- Put tiles method. 
-- Test Put and Draw methods.
-- Handle exception. With each test.
+- Handle Exceptions of Choose.
 
 ### Changed
 
-- Handle exception. In draw methods.
-- Change the Changelog based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
-### Issues
-
-- Anything at the moment
-
-
-
-
-## Status
-
-- Development.
-
-## (0.0.2) V 18-08-23
-
-### In Progress
-
-- Test Joker Tile.
-
-### Added
-
-- Joker Tile Class.
-- Diccionary For Tiles.
 - Choose Joker Tile Method.
-
-### Changed
-
--Tile list change by a for method
+- Order of the classes.
+- Order of CHANGELOG.md.
 
 ### Issues
 
-- Choose Joker Tile Test. Not working.
-
-
-
-
-## Status
-
-- Development.
-
-## (0.0.2) V 18-08-23
-
-### In Progress
-
-- Test Joker Tile.
-
-### Added
-
-- Joker Tile Class.
-- Diccionary For Tiles.
-- Choose Joker Tile Method.
-
-### Changed
-
--Tile list change by a for method
-
-### Issues
-
-- Choose Joker Tile Test. Not working.
+- Diccionary class. how to implement it.
 
 
 
@@ -109,3 +53,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Issues
 
 - Anything at the moment.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.0.2) V 18-08-23
+
+### In Progress
+
+- Test Joker Tile.
+
+### Added
+
+- Joker Tile Class.
+- Diccionary For Tiles.
+- Choose Joker Tile Method.
+
+### Changed
+
+-Tile list change by a for method
+
+### Issues
+
+- Choose Joker Tile Test. Not working.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.0.1) V 17-08-23
+
+### Added
+
+- Put tiles method. 
+- Test Put and Draw methods.
+- Handle exception. With each test.
+
+### Changed
+
+- Handle exception. In draw methods.
+- Change the Changelog based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+### Issues
+
+- Anything at the moment
+
