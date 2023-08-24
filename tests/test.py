@@ -36,7 +36,6 @@ class TestTileBag(unittest.TestCase):
         tilebag.put_tiles([Tile('A',1)])
         self.assertEqual(tilebag.tiles_remaining(),TOTALTILES)
         
-
 class TestJoker(unittest.TestCase):
 
     def test_Joker(self):
@@ -56,3 +55,5 @@ class TestJoker(unittest.TestCase):
         with self.assertRaises(EmptyTiles):
             joker_tile.chooseLetter('w')
 
+class TestPlayer(unittest.TestCase):
+    pass
