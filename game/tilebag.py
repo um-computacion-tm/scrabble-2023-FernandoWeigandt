@@ -50,7 +50,6 @@ class TileBag:
                     tile_drawn.append(self.tiles.pop())
                 return tile_drawn
         except TooMuchTiles:
-            print('Sacaste mas fichas de las que habian')
             return tile_drawn
 
     def put_tiles(self,tiles:list):
@@ -60,7 +59,7 @@ class TileBag:
             else:
                 raise TooMuchTilesPut
         except TooMuchTilesPut:
-            print('La bolsa esta llena o hay fichas de mas')
+            return TooMuchTilesPut
 
     def tiles_remaining(self):
         return len(self.tiles)

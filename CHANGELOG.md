@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## Status
+
+- Development.
+
+## (0.0.5) V 29-08-23
+
+### Added
+
+- Files for the new classes.
+- Classes: Board, Player
+- Test for Player and Board class and his methods.
+- Create a virtual enviroment for the project.
+- Create a requirements.txt file for the project.
+
+### Changed
+
+- Files Organization.
+- .gitignore file.
+
+### Issues
+- Incomplete methods in Player and Board class.
+- Incomplete test for Player and Board class.
+
+
+
+
 ## Status
 
 - Development.
