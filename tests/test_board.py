@@ -7,7 +7,6 @@ class TestBoard(unittest.TestCase):
         board = Board()            
         self.assertEqual(len(board.grid),15,)
         self.assertEqual(len(board.grid[0]),15,)        
-        print ('hello world')
 
 
 class TestCell(unittest.TestCase):
