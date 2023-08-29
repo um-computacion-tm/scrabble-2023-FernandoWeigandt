@@ -1,5 +1,5 @@
 import unittest
-from game.tiles import *
+from game.tilebag import *
 
 
 
@@ -9,6 +9,27 @@ class TestTiles(unittest.TestCase):
         tile = Tile('A', 1)
         self.assertEqual(tile.letter, 'A')
         self.assertEqual(tile.value, 1)
+
+
+class TestJoker(unittest.TestCase):
+
+    def test_Joker(self):
+        tilebag=TileBag()
+        tilebag.draw_tiles(7)
+        tilebag.put_tiles([JokerTile('A',1)])
+        self.assertEqual(tilebag.tiles_remaining(),TOTALTILES-6)
+
+    def test_Joker_chooseLetter(self):
+        jokertile = JokerTile('_', 0)
+        jokertile.chooseLetter('a')
+        self.assertEqual(jokertile.letter, 'A')
+        self.assertEqual(jokertile.value, 1)
+
+    def test_Joker_chooseLetter_without_letters(self):
+        joker_tile=JokerTile('_',0)
+        with self.assertRaises(EmptyTiles):
+            joker_tile.chooseLetter('w')
+
 
 class TestTileBag(unittest.TestCase):
 
@@ -36,23 +57,3 @@ class TestTileBag(unittest.TestCase):
         tilebag.put_tiles([Tile('A',1)])
         self.assertEqual(tilebag.tiles_remaining(),TOTALTILES)
         
-
-class TestJoker(unittest.TestCase):
-
-    def test_Joker(self):
-        tilebag=TileBag()
-        tilebag.draw_tiles(7)
-        tilebag.put_tiles([JokerTile('A',1)])
-        self.assertEqual(tilebag.tiles_remaining(),TOTALTILES-6)
-
-    def test_Joker_chooseLetter(self):
-        jokertile = JokerTile('_', 0)
-        jokertile.chooseLetter('a')
-        self.assertEqual(jokertile.letter, 'A')
-        self.assertEqual(jokertile.value, 1)
-
-    def test_Joker_chooseLetter_without_letters(self):
-        joker_tile=JokerTile('_',0)
-        with self.assertRaises(EmptyTiles):
-            joker_tile.chooseLetter('w')
-
