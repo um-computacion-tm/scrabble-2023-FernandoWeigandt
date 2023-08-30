@@ -4,12 +4,17 @@ class Board():
     def __init__(self,grid=None):
         self.grid = [[ Cell(1, '') for _ in range(15) ]for _ in range(15)]
 
+    def calculate_word_value(self,word):
+        ...
+
+
+
 
 class Cell:
-    def __init__(self, multiplier, multiplier_type):
+    def __init__(self, multiplier, multiplier_type='',letter=None,active=True):
         self.multiplier = multiplier
         self.multiplier_type = multiplier_type
-        self.letter = None
+        self.letter=None
         
 
     def add_letter(self, letter:Tile):
@@ -21,6 +26,3 @@ class Cell:
             return 0
         if self.multiplier_type == 'letter':
             return self.letter.value * self.multiplier
-        else:
-            return self.letter.value
-        

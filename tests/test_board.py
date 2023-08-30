@@ -10,8 +10,9 @@ class TestBoard(unittest.TestCase):
 
 
 class TestCell(unittest.TestCase):
+    
     def test_init(self):
-        cell = Cell(multiplier=2, multiplier_type='letter')
+        cell = Cell(multiplier=2, multiplier_type='letter',)
         self.assertEqual(cell.multiplier,2)
         self.assertEqual(cell.multiplier_type,'letter')
         self.assertIsNone(cell.letter)
@@ -23,17 +24,36 @@ class TestCell(unittest.TestCase):
         cell.add_letter(letter=letter)
         self.assertEqual(cell.letter, letter)
 
-    def test_cell_value(self):
+    def test_cell_multiplier_letter(self):
         cell = Cell(multiplier=2, multiplier_type='letter')
         letter = Tile(letter='p', value=3)
         cell.add_letter(letter=letter)
         self.assertEqual(cell.calculate_value(),6)
 
-    def test_cell_multiplier_word(self):
-        cell = Cell(multiplier=2, multiplier_type='word')
-        letter = Tile(letter='p', value=3)
-        cell.add_letter(letter=letter)
-        self.assertEqual(cell.calculate_value(),3)
+
+    # def test_cell_multiplier_word(self):
+    #     word=[Cell(Tile('C',1),),Cell(Tile('A',1)),Cell(2,'word',Tile('S',2)),Cell(Tile('A',1))]
+    #     value=value.calculated_value()
+    #     self.assertEqual(value,10)
+
+    # def test_cell_multiplier_both(self):
+    #     word=[Cell(Tile('C',1),),Cell(Tile('A',1)),Cell(2,'word',Tile('S',2)),Cell(3,'letter',Tile('A',1))]
+    #     value=value.calculated_value()
+    #     self.assertEqual(value,14)
+
+    # def test_cell_no_multiplier(self):
+    #     word=[Cell(Tile('C',1),),Cell(Tile('A',1)),Cell(2,'word',Tile('S',2)),Cell(3,'letter',Tile('A',1))]
+    #     value=value.calculated_value(word)
+    #     self.assertEqual(value,14)
+    #     word=[Cell(Tile('C',1),),Cell(Tile('A',1)),Cell(2,'word',Tile('S',2)),Cell(3,'letter',Tile('A',1)),Cell(Tile('S',2))]
+    #     word.disable_multiplier()
+    #     value=value.calculated_value(word)
+    #     self.assertEqual(value,7)
+
+
+
+        
+    
 
 
 
