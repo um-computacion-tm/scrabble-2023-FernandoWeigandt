@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Status
+- Development.
+## (0.0.6) V 30-08-23
+### Added
+- Calculate Word and Letters Multiplier.
+- Test for Calculate Word and Letters Multiplier.
+- Add Tile method in Player class.
+- Test for Add Tile method in Player class.
+- Test for Scrabble game class.
+- CodeClimate and CircleCI Implemented.
+### Changed
+ - Nothing at the moment.
+### Issues
+- Incomplete methods in Player and Board class.
+
+
+
+## Status
 
 - Development.
 

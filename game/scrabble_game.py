@@ -9,5 +9,5 @@ class ScrabbleGame:
         self.board = Board()
         self.bag_tiles = TileBag()
         self.players = []
-        for _ in range(players_count):
-            self.players.append(Player())
+        for number in range(players_count):
+            self.players.append(Player(number=number))

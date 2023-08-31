@@ -4,4 +4,7 @@ class Player:
         self.name=name
         self.number=number
         self.score=score
-        self.tiles=bag_tiles.draw_tiles(7)
+        self.tiles=[]
+
+    def add_tiles(self,tiles):
+        self.tiles.extend(tiles)
