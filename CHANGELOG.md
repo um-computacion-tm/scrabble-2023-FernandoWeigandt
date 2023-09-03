@@ -12,6 +12,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Development.
 
+## (0.0.7) V 03-09-23
+
+### Added
+
+- Change Tile method in Player class.
+- Test for Change Tile method in Player class.
+- End Game method in Scrabble class.
+- Test for End Game method in Scrabble class.
+
+### Changed
+
+ - Nothing at the moment.
+
+### Issues
+
+- @patch in test for CLI.
+
+
+
+
+## Status
+
+- Development.
+
 ## (0.0.6) V 30-08-23
 
 ### Added
@@ -30,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Issues
 
 - Incomplete methods in Player and Board class.
+
 
 
 
