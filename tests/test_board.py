@@ -6,7 +6,36 @@ class TestBoard(unittest.TestCase):
     def test_init(self):
         board = Board()            
         self.assertEqual(len(board.grid),15,)
-        self.assertEqual(len(board.grid[0]),15,)        
+        self.assertEqual(len(board.grid[0]),15,)   
+
+    def test_len_of_word_in_board_x(self):
+        board= Board()
+        word='facultad'
+        location=(5,4)
+        orientation='H'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
+
+    def test_len_of_word_in_board_y(self):
+        board= Board()
+        word='facultad'
+        location=(5,4)
+        orientation='V'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
+
+    def test_len_of_word_out_of_board_x(self):
+        board= Board()
+        word='facultad'
+        location=(10,5)
+        orientation='H'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
+
+    def test_len_of_word_out_of_board_y(self):
+        board= Board()
+        word='facultad'
+        location=(5,10)
+        orientation='V'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
+
 
 
 class TestCell(unittest.TestCase):

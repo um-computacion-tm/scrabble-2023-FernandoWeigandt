@@ -22,6 +22,8 @@ class ScrabbleGame:
             index=self.players.index(self.current_player)+1
             self.current_player=self.players[index]   
     
+    def validate_word(self, word, location, orientation):
+        self.board.validate_len_of_word_in_board(self, word, location, orientation)
 
     def end_game(self):
         if  self.bag_tiles == []:
