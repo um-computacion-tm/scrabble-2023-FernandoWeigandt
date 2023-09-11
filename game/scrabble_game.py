@@ -9,8 +9,25 @@ class ScrabbleGame:
         self.board = Board()
         self.bag_tiles = TileBag()
         self.players = []
+        self.current_player = None
         for number in range(players_count):
             self.players.append(Player(number=number))
+
+    def next_turn(self):
+        if self.current_player == None:
+            self.current_player = self.players[0]
+        elif self.current_player == self.players[-1]:
+            self.current_player = self.players[0]
+        else:
+            index=self.players.index(self.current_player)+1
+            self.current_player=self.players[index]   
+    
+    def validate_word(self, word):
+        if word == '':
+            return False
+        else:
+            return True
+
 
     def end_game(self):
         if  self.bag_tiles == []:

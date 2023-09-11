@@ -6,7 +6,59 @@ class TestBoard(unittest.TestCase):
     def test_init(self):
         board = Board()            
         self.assertEqual(len(board.grid),15,)
-        self.assertEqual(len(board.grid[0]),15,)        
+        self.assertEqual(len(board.grid[0]),15,)   
+
+    def test_len_of_word_in_board_x(self):
+        board= Board()
+        word='facultad'
+        location=(5,4)
+        orientation='H'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
+
+    def test_len_of_word_in_board_y(self):
+        board= Board()
+        word='facultad'
+        location=(5,4)
+        orientation='V'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
+
+    def test_len_of_word_out_of_board_x(self):
+        board= Board()
+        word='facultad'
+        location=(10,5)
+        orientation='H'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
+
+    def test_len_of_word_out_of_board_y(self):
+        board= Board()
+        word='facultad'
+        location=(5,10)
+        orientation='V'
+        self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
+
+    def test_put_word_horizontal(self):
+        board= Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(5,4)
+        orientation='H'
+        board.put_word(word,location,orientation)
+        self.assertEqual(board.grid[5][4].letter.letter,Tile('c',1).letter)
+        self.assertEqual(board.grid[6][4].letter.letter,Tile('a',1).letter)
+        self.assertEqual(board.grid[7][4].letter.letter,Tile('s',2).letter)
+        self.assertEqual(board.grid[8][4].letter.letter,Tile('a',1).letter)
+
+    def test_put_word_vertical(self):
+        board= Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(5,4)
+        orientation='V'
+        board.put_word(word,location,orientation)
+        self.assertEqual(board.grid[5][4].letter.letter,Tile('c',1).letter)
+        self.assertEqual(board.grid[5][5].letter.letter,Tile('a',1).letter)
+        self.assertEqual(board.grid[5][6].letter.letter,Tile('s',2).letter)
+        self.assertEqual(board.grid[5][7].letter.letter,Tile('a',1).letter)
+
+
 
 
 class TestCell(unittest.TestCase):
@@ -21,13 +73,13 @@ class TestCell(unittest.TestCase):
     def test_add_letter(self):
         cell = Cell(multiplier=1, multiplier_type='')
         letter = Tile(letter='p', value=3)
-        cell.add_letter(letter=letter)
+        cell.add_letter(tile=letter)
         self.assertEqual(cell.letter, letter)
 
     def test_cell_multiplier_letter(self):
         cell = Cell(multiplier=2, multiplier_type='letter')
         letter = Tile(letter='p', value=3)
-        cell.add_letter(letter=letter)
+        cell.add_letter(tile=letter)
         self.assertEqual(cell.calculate_value(),6)
 
 

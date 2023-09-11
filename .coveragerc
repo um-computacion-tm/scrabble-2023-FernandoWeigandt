@@ -1,6 +1,7 @@
 [run]
 source =
     game
+    game/cli
     tests
 omit =
     env/*

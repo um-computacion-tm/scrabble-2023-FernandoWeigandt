@@ -9,9 +9,6 @@ class Player:
     def add_tiles(self,tiles):
         self.tiles.extend(tiles)
 
-
-
-
     def change_tiles(self,player_old_tiles_index=[],player_new_tiles=[]):
         tiles_to_change=[]
         for tile_index in range (len(player_old_tiles_index)):
