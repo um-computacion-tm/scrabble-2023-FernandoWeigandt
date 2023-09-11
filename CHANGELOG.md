@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## Status
+
+- Development.
+
+## (0.0.9) V 11-09-23
+
+### Added
+
+- Put word method in Board class.
+- Test for Put word method in Board class.
+- Board and menu in CLI.
+- Dockerfile.
+
+### Changed
+
+ - Nothing at the moment.
+
+ ### In Progress
+
+ - Validate Word in Scrabble Game Class.
+ - Test for Validate Word in Scrabble Game Class.
+
+### Issues
+
+- DockerFile Error.
+
+
+
+
 ## Status
 
 - Development.
@@ -15,7 +45,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Hierarchy of Players Turns.
 - Test for Hierarchy of Players Turns.
- 
+
+### Changed
+
+ - Nothing at the moment.
+
+### Issues
+
+- Nothing at the moment.
+
 
 
 

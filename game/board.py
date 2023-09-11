@@ -29,11 +29,17 @@ class Board():
             else:
                 return True
             
-    def put_word():
-        pass
+    def put_word(self,word,location, orientation):
+        location_x = location[0]
+        location_y = location[1]
+        if orientation == 'H':
+            for i in range(len(word)):
+                self.grid[location_x+i][location_y].add_letter(word[i])
+        else:
+            for i in range(len(word)):
+                self.grid[location_x][location_y+i].add_letter(word[i])
+    
         
-
-
 class Cell:
     def __init__(self, multiplier, multiplier_type='',letter=None,active=True):
         self.multiplier = multiplier
@@ -41,8 +47,8 @@ class Cell:
         self.letter=None
         
 
-    def add_letter(self, letter:Tile):
-        self.letter = letter
+    def add_letter(self, tile):
+        self.letter = tile
         
 
     def calculate_value(self):

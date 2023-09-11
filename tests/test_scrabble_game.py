@@ -26,6 +26,12 @@ class TestGameInitialization(unittest.TestCase):
         scrabble_game.current_player = scrabble_game.players[2]
         scrabble_game.next_turn()
         self.assertEqual (scrabble_game.current_player, scrabble_game.players[0])
+    
+    def test_validate_word(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        self.assertTrue(scrabble_game.validate_word('hola'))
+        self.assertFalse(scrabble_game.validate_word(''))
+
 
 class TestGameEnd(unittest.TestCase):
     def test_end_game(self):
