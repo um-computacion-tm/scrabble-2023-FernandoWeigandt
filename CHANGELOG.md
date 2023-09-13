@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+
+## Status 
+
+- Development.
+
+## (0.1.0) V 13-09-23
+
+### Added
+
+- Validate initialization Board Class.
+- Test for Validate initialization Board Class.
+- Is empty method in Board Class.
+- Test for Is empty method in Board Class.
+
+### Changed
+
+ - DockerFile.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
+
 ## Status
 
 - Development.
