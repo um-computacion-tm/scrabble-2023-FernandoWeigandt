@@ -8,6 +8,19 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(len(board.grid),15,)
         self.assertEqual(len(board.grid[0]),15,)   
 
+    def test_is_empty(self):
+        board=Board()
+        self.assertEqual(board.is_empty(), True)
+
+    def test_not_empty(self):
+        board=Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(7,7)
+        orientation='H'
+        board.put_word(word,location,orientation)
+        self.assertEqual(board.is_empty(), False)
+
+
     def test_len_of_word_in_board_x(self):
         board= Board()
         word='facultad'
@@ -36,29 +49,68 @@ class TestBoard(unittest.TestCase):
         orientation='V'
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
 
-    def test_put_word_horizontal(self):
+    def test_put_word_horizontal_empty(self):
         board= Board()
         word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location=(5,4)
+        location=(7,7)
         orientation='H'
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[5][4].letter.letter,Tile('c',1).letter)
-        self.assertEqual(board.grid[6][4].letter.letter,Tile('a',1).letter)
-        self.assertEqual(board.grid[7][4].letter.letter,Tile('s',2).letter)
-        self.assertEqual(board.grid[8][4].letter.letter,Tile('a',1).letter)
+        self.assertEqual(board.grid[7][7].letter.letter,Tile('c',1).letter)
+        self.assertEqual(board.grid[8][7].letter.letter,Tile('a',1).letter)
+        self.assertEqual(board.grid[9][7].letter.letter,Tile('s',2).letter)
+        self.assertEqual(board.grid[10][7].letter.letter,Tile('a',1).letter)
 
-    def test_put_word_vertical(self):
+    def test_put_word_vertical_empty(self):
         board= Board()
         word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location=(5,4)
+        location=(7,7)
         orientation='V'
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[5][4].letter.letter,Tile('c',1).letter)
-        self.assertEqual(board.grid[5][5].letter.letter,Tile('a',1).letter)
-        self.assertEqual(board.grid[5][6].letter.letter,Tile('s',2).letter)
-        self.assertEqual(board.grid[5][7].letter.letter,Tile('a',1).letter)
+        self.assertEqual(board.grid[7][7].letter.letter,Tile('c',1).letter)
+        self.assertEqual(board.grid[7][8].letter.letter,Tile('a',1).letter)
+        self.assertEqual(board.grid[7][9].letter.letter,Tile('s',2).letter)
+        self.assertEqual(board.grid[7][10].letter.letter,Tile('a',1).letter)
+
+    def test_validate_word_in_board_horizontal(self):
+        board= Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(7,4)
+        orientation='H'
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
 
 
+    def test_validate_word_in_board_vertical(self):
+        board= Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(4,7)
+        orientation='V'
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
+
+    def test_not_validate_word_in_board_horizontal(self):
+        board= Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(5,8)
+        orientation='H'
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
+
+    def test_not_validate_word_in_board_vertical(self):
+        board= Board()
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(8,5)
+        orientation='V'
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
+
+    def test_not_empty(self):
+        board=Board()
+        word0=[Tile('a',1),Tile('u',1),Tile('t',2),Tile('o',1)]
+        location0=(7,7)
+        orientation='H'
+        board.put_word(word0,location0,orientation)
+        word=[Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location=(8,7)
+        orientation='H'
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
+                                             
 
 
 class TestCell(unittest.TestCase):

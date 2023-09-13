@@ -1,12 +1,13 @@
-FROM python:3-alpine
+FROM python:3-slim
 
-WORKDIR /Scrabble
+WORKDIR /scrabble
 
-RUN apk update
-RUN apk add git
-RUN apk add bash
+RUN apt update
+#RUN apk add bash
 
-RUN git clone 
+#RUN git clone 
+
+COPY . .
 
 RUN pip install -r requirements.txt
 
