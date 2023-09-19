@@ -140,7 +140,6 @@ class TestBoard(unittest.TestCase):
 
 
 
-
 class TestCell(unittest.TestCase):
     
     def test_init(self):
