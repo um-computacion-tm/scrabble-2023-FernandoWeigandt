@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## Status
+
+- Development.
+
+## (0.1.1) V 18-09-23
+
+### Added
+
+- Show Board method in Board Class.
+- Test for Show Board method in Board Class.
+
+### Changed
+
+- Validate Init of game method in Board Class.
+- Put word method in Board Class.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
 
 ## Status 
 
