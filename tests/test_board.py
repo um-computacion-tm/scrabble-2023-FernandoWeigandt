@@ -109,10 +109,10 @@ class TestBoard(unittest.TestCase):
         orientation = 'H'
         board.put_word(word0,location0,orientation)
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location = (8,7)
-        orientation = 'H'
+        location = (6,7)
+        orientation = 'V'
         board.put_word(word,location,orientation)
-        self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
         
     def test_show_board(self):
         board = Board()
@@ -138,7 +138,18 @@ class TestBoard(unittest.TestCase):
         board.put_word(word1,location1,orientation)
         board.show_board()
 
-
+    def test_show_overlapping_words(self):
+        board=Board()
+        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location = (7,7)
+        orientation = 'H'
+        board.put_word(word,location,orientation)
+        word1 = [Tile('q',1),Tile('u',1),Tile('e',2)]
+        location1 = (7,7)
+        orientation = 'H'
+        board.put_word(word1,location1,orientation)
+        board.show_board()
+        self.assertEqual(board.put_word(word1,location1,orientation),False)
 
 class TestCell(unittest.TestCase):
     
