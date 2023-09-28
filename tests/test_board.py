@@ -17,7 +17,6 @@ class TestBoard(unittest.TestCase):
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (7,7)
         orientation = 'H'
-        board.put_word(word,location,orientation)
         self.assertEqual(board.is_empty(), False)
 
     def test_len_of_word_in_board_x(self):
@@ -48,34 +47,11 @@ class TestBoard(unittest.TestCase):
         orientation ='V'
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
 
-    def test_put_word_horizontal_empty(self):
-        board = Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location =(7,7)
-        orientation ='H'
-        board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[7][7].letter.letter,Tile('c',1).letter)
-        self.assertEqual(board.grid[7][8].letter.letter,Tile('a',1).letter)
-        self.assertEqual(board.grid[7][9].letter.letter,Tile('s',2).letter)
-        self.assertEqual(board.grid[7][10].letter.letter,Tile('a',1).letter)
-
-    def test_put_word_vertical_empty(self):
-        board = Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location = (7,7)
-        orientation = 'V'
-        board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[7][7].letter.letter,Tile('c',1).letter)
-        self.assertEqual(board.grid[8][7].letter.letter,Tile('a',1).letter)
-        self.assertEqual(board.grid[9][7].letter.letter,Tile('s',2).letter)
-        self.assertEqual(board.grid[10][7].letter.letter,Tile('a',1).letter)
-
     def test_validate_word_in_board_horizontal(self):
         board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (7,4)
         orientation = 'H'
-        board.put_word(word,location,orientation)
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
 
     def test_validate_word_in_board_vertical(self):
@@ -83,7 +59,6 @@ class TestBoard(unittest.TestCase):
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (4,7)
         orientation = 'V'
-        board.put_word(word,location,orientation)
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
 
     def test_not_validate_word_in_board_horizontal(self):
@@ -91,7 +66,6 @@ class TestBoard(unittest.TestCase):
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (5,8)
         orientation = 'H'
-        board.put_word(word,location,orientation)
         self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
 
     def test_not_validate_word_in_board_vertical(self):
@@ -99,7 +73,6 @@ class TestBoard(unittest.TestCase):
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (8,5)
         orientation = 'V'
-        board.put_word(word,location,orientation)
         self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
 
     def test_not_empty(self):
@@ -107,11 +80,9 @@ class TestBoard(unittest.TestCase):
         word0 = [Tile('a',1),Tile('u',1),Tile('t',2),Tile('o',1)]
         location0 = (7,7)
         orientation = 'H'
-        board.put_word(word0,location0,orientation)
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (6,7)
         orientation = 'V'
-        board.put_word(word,location,orientation)
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
         
     def test_show_board(self):
@@ -120,36 +91,46 @@ class TestBoard(unittest.TestCase):
 
     def test_show_board_with_word(self):
         board = Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location = (7,7)
-        orientation = 'H'
-        board.put_word(word,location,orientation)
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
         board.show_board()
 
     def test_show_board_with_words(self):
         board=Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location = (7,7)
-        orientation = 'H'
-        board.put_word(word,location,orientation)
-        word1 = [Tile('a',1),Tile('u',1),Tile('t',2),Tile('o',1)]
-        location1 = (8,7)
-        orientation = 'V'
-        board.put_word(word1,location1,orientation)
+        'Palabra 1'
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
+        'Palabra 2'
+        board.grid[5][7].letter = Tile('s',2)
+        board.grid[6][7].letter = Tile('a',1)
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[8][7].letter = Tile('a',1)
         board.show_board()
 
     def test_show_overlapping_words(self):
         board=Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
+        word = [Tile('s',2),Tile('a',1),Tile('c',1),Tile('a',1)]
         location = (7,7)
         orientation = 'H'
-        board.put_word(word,location,orientation)
-        word1 = [Tile('q',1),Tile('u',1),Tile('e',2)]
-        location1 = (7,7)
-        orientation = 'H'
-        board.put_word(word1,location1,orientation)
-        board.show_board()
-        self.assertEqual(board.put_word(word1,location1,orientation),False)
+        self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
+
+    def test_validate_word(self):
+        board=Board()
+        word = 'casa'
+        self.assertEqual(board.validate_word(word),True)
+
+    def test_validate_word_false(self):
+        board=Board()
+        word = 'asd'
+        self.assertEqual(board.validate_word(word),False)
 
 class TestCell(unittest.TestCase):
     

@@ -1,8 +1,10 @@
 from game.tilebag import Tile
+from pyrae import dle 
 
 class Board():
     def __init__(self,grid=None):
         self.grid = [[ Cell(1, '') for _ in range(15) ]for _ in range(15)]
+
 
     def calculate_word_value(self, word):
         value = 0
@@ -13,53 +15,48 @@ class Board():
                 value *= cell.multiplier
                 cell.multiplier = 1
         return value
-
-    def validate_len_of_word_in_board(self, word, location, orientation):
-        location_x = location[0]
-        location_y = location[1]
-        len_word = len(word)
-        if orientation == 'H':
-            if location_x + len_word > 15:
-                return False
-            else:
-                return True
-        else:
-            if location_y + len_word > 15:
-                return False
-            else:
-                return True
+    
 
     def is_empty(self):
         if self.grid[7][7].letter is None:
             return True
-        
     
-    def put_word(self,word,location, orientation):
-        location_x = location[0]
-        location_y = location[1]
-        if self.grid[location_x][location_y].letter is None:
-            if orientation == 'H':
-                for i in range(len(word)):
-                    self.grid[location_x][location_y+i].add_letter(word[i])
-            else:
-                for i in range(len(word)):
-                    self.grid[location_x+i][location_y].add_letter(word[i])
-            return True
-        else:
-            return False
 
     def validate_init_of_game(self, word, location, orientation):
-            center_row, center_col = 7, 7
-            if orientation == "H":
-                word_coords = [(location[0], location[1] + i) for i in range(len(word))]
-            elif orientation == "V":
-                word_coords = [(location[0] + i, location[1]) for i in range(len(word))]
-            for coord in word_coords:
-                if coord == (center_row, center_col):
+                center_row, center_col = 7, 7
+                if orientation == "H":
+                    word_coords = [(location[0], location[1] + i) for i in range(len(word))]
+                elif orientation == "V":
+                    word_coords = [(location[0] + i, location[1]) for i in range(len(word))]
+                for coord in word_coords:
+                    if coord == (center_row, center_col):
+                        return True
+                return False
+        
+
+    def validate_len_of_word_in_board(self, word, location, orientation):
+        if self.validate_word(word):
+            location_x = location[0]
+            location_y = location[1]
+            len_word = len(word)
+            if orientation == 'H':
+                if location_x + len_word > 15:
+                    return False
+                else:
                     return True
+            else:
+                if location_y + len_word > 15:
+                    return False
+                else:
+                    return True
+        
+    def validate_word(self, word):
+        flag=dle.search_by_word(word)
+        if word.lower() in flag.title:
+            return True 
+        else:
             return False
-
-
+        
 
     def show_board(self):
         print('')
