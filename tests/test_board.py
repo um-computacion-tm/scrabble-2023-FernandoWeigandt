@@ -14,9 +14,10 @@ class TestBoard(unittest.TestCase):
 
     def test_not_empty(self):
         board = Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location = (7,7)
-        orientation = 'H'
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
         self.assertEqual(board.is_empty(), False)
 
     def test_len_of_word_in_board_x(self):
@@ -77,9 +78,6 @@ class TestBoard(unittest.TestCase):
 
     def test_not_empty(self):
         board = Board()
-        word0 = [Tile('a',1),Tile('u',1),Tile('t',2),Tile('o',1)]
-        location0 = (7,7)
-        orientation = 'H'
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (6,7)
         orientation = 'V'
@@ -132,6 +130,54 @@ class TestBoard(unittest.TestCase):
         word = 'asd'
         self.assertEqual(board.validate_word(word),False)
 
+    def test_validate_word_place_board_vertical(self):
+        board=Board()
+        'Palabra 1'
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
+        word = 'saca'
+        orientation = 'V'
+        location = (5,7)
+        self.assertEqual(board.validate_word_place_board(word, location, orientation),True)
+
+    def test_validate_word_place_board_horizontal(self):
+        board=Board()
+        'Palabra 1'
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
+        word = 'saca'
+        orientation = 'H'
+        location = (6,7)
+        self.assertEqual(board.validate_word_place_board(word, location, orientation),False)
+
+    def test_validate_word_place_board_valid(self):
+        board=Board()
+        board.grid[7][7].add_letter = Tile('c',1)
+        word = 'saca'
+        location = (7,6)
+        orientation = 'H'
+        self.assertEqual(board.validate_word_place_board(word, location, orientation),False)
+      
+
+    def test_validate_word_place_board_cruce(self):
+        board=Board()
+        'Palabra 1'
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[8][7].letter = Tile('a',1)
+        board.grid[9][7].letter = Tile('s',2)
+        board.grid[10][7].letter = Tile('a',1)
+        word = 'saca'
+        orientation = 'H'
+        location = (8,6)
+        self.assertEqual(board.validate_word_place_board(word, location, orientation),True)
+
+    
+
+
 class TestCell(unittest.TestCase):
     
     def test_init(self):
@@ -141,11 +187,13 @@ class TestCell(unittest.TestCase):
         self.assertIsNone(cell.letter)
         self.assertEqual(cell.calculate_value(),0)
 
+
     def test_add_letter(self):
         cell = Cell(multiplier=1, multiplier_type='')
         letter = Tile(letter='p', value=3)
         cell.add_letter(tile=letter)
         self.assertEqual(cell.letter, letter)
+
 
     def test_cell_multiplier_letter(self):
         cell = Cell(multiplier=2, multiplier_type='letter')
@@ -181,6 +229,7 @@ class TestCell(unittest.TestCase):
         value=Board().calculate_word_value(word)
         self.assertEqual(value,18)
 
+
     def test_cell_multiplier_none(self):
         cell_1 = Cell(multiplier=1,multiplier_type='letter')
         cell_1.add_letter(Tile('C', 1)) 
@@ -195,6 +244,7 @@ class TestCell(unittest.TestCase):
         self.assertEqual(value,15)
         value2=Board().calculate_word_value(word)
         self.assertEqual(value2,5)
+
 
 
 if __name__ == '__main__':

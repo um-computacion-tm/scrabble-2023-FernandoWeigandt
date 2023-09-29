@@ -49,7 +49,8 @@ class Board():
                     return False
                 else:
                     return True
-        
+
+
     def validate_word(self, word):
         flag=dle.search_by_word(word)
         if word.lower() in flag.title:
@@ -57,6 +58,31 @@ class Board():
         else:
             return False
         
+
+    def validate_word_place_board(self, word, location, orientation):
+            if self.validate_word(word):
+                h_space = len(word) <= len(self.grid)-location[0]
+                v_space = len(word) <= len(self.grid)-location[1]
+                intersections = 0
+                is_valid = 0
+                if (orientation=='H' and h_space):
+                    for i in range(len(word)):
+                        cell = self.grid[location[0]][location[1]+i].letter
+                        if cell is not None:
+                            intersections += 1
+                            if cell.letter == word[i]:
+                                is_valid += 1
+                elif ((not orientation=='H') and v_space):
+                    for i in range(len(word)):
+                        cell = self.grid[location[0]+i][location[1]].letter
+                        if cell is not None:
+                            intersections += 1
+                            if cell.letter == word[i]:
+                                is_valid += 1
+                if is_valid != 0 and intersections == is_valid:
+                    return True
+                else:
+                    return False    
 
     def show_board(self):
         print('')
