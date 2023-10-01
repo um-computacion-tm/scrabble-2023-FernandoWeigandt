@@ -3,6 +3,7 @@ from game.player import *
 from game.tilebag import *
 
 
+
 class TestPlayer(unittest.TestCase):
     def test_init(self):
         player=Player('Fernando',0,0,TileBag())
@@ -29,5 +30,8 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(player.tiles[0].letter,'D')
         self.assertEqual(player.tiles[1].letter,'E')
         self.assertEqual(player.tiles[2].letter,'C')
+   
+
+
 
 

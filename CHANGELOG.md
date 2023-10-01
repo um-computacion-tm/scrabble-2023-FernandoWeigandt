@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+
+## Status
+
+- Development.
+
+## (0.1.2) V 27-09-23
+
+### Added
+
+- Overlap method in Board Class.
+- Test for Overlap method in Board Class.
+
+### Changed
+
+- Put word method in Board Class.
+- Test for Put word method in Board Class.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
+
 ## Status
 
 - Development.
@@ -27,7 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Nothing at the moment.
 
+### Soon
 
+- Validate word from RAE.
+- Crossword validation.
 
 
 ## Status 
