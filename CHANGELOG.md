@@ -12,6 +12,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Development.
 
+## (0.1.3) V 04-10-23
+
+### Added
+
+- Validate word from RAE.
+- Test for Validate word from RAE.
+- Crossword validation.
+- Test for Crossword validation.
+- Validate word from RAE and Show Board in Scrabble Game Class.
+- Test for Validate word from RAE and Show Board in Scrabble Game Class.
+- Show Tiles method in Player Class.
+- Test for Show Tiles method in Player Class.
+- Distribute Tiles method in Scrabble Game Class.
+- Test for Distribute Tiles method in Scrabble Game Class.
+
+### Removed
+- Put word method in Board Class.
+- Test for Put word method in Board Class.
+
+
+
+
+## Status
+
+- Development.
+
 ## (0.1.2) V 27-09-23
 
 ### Added

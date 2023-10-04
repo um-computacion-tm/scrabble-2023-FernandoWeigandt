@@ -1,4 +1,5 @@
 from game.tilebag import Tile
+from game.cell import Cell
 from pyrae import dle 
 
 class Board():
@@ -53,10 +54,10 @@ class Board():
 
     def validate_word(self, word):
         flag=dle.search_by_word(word)
-        if word.lower() in flag.title:
-            return True 
-        else:
+        if word.lower() not in flag.title:
             return False
+        else:
+            return True
         
 
     def validate_word_place_board(self, word, location, orientation):
@@ -100,23 +101,3 @@ class Board():
             print('')
         print('')   
 
-
-class Cell:
-    def __init__(self, multiplier, multiplier_type='',letter=None,active=True):
-        self.multiplier = multiplier
-        self.multiplier_type = multiplier_type
-        self.letter=None
-        
-
-    def add_letter(self, tile):
-        self.letter = tile
-        
-
-    def calculate_value(self):
-        if self.letter is None:
-            return 0
-        if self.multiplier_type == 'letter':
-            return self.letter.value * self.multiplier
-        else:
-            return self.letter.value
-        

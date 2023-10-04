@@ -23,7 +23,7 @@ class TestJoker(unittest.TestCase):
         jokertile = JokerTile('_', 0)
         jokertile.chooseLetter('a')
         self.assertEqual(jokertile.letter, 'A')
-        self.assertEqual(jokertile.value, 1)
+        self.assertEqual(jokertile.value, 0)
 
     def test_Joker_chooseLetter_without_letters(self):
         joker_tile=JokerTile('_',0)

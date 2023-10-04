@@ -9,7 +9,7 @@
 #         try:
 #             player_count = int(input("How many players? "))
 #             if player_count <= 1 or player_count > 4:
-#                 raise ValueError
+#                 print("Please enter a number between 2 and 4")
 #             break
 #         except ValueError:
 #             print("Please enter a number between 2 and 4")
@@ -22,4 +22,8 @@
 #             location_y = input("Enter y coordinate: ")
 #             location = [location_x, location_y]
 #             orientation = input("Enter orientation (V/H): ")
+#             scrabble_game.validate_word(word)
+#             scrabble_game.show_board()
+#             scrabble_game.show_player_tiles()
+
 
