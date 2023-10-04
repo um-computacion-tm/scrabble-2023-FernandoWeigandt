@@ -8,7 +8,7 @@ class TestGameInitialization(unittest.TestCase):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertIsNotNone(scrabble_game.board)
         self.assertEqual(len(scrabble_game.players), 3)
-        self.assertIsNotNone(scrabble_game.bag_tiles)
+        self.assertIsNotNone(scrabble_game.tilebag)
 
     def test_next_turn_when_game_is_starting(self):
         scrabble_game = ScrabbleGame(players_count=3)
@@ -30,14 +30,24 @@ class TestGameInitialization(unittest.TestCase):
     def test_validate_word(self):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertTrue(scrabble_game.validate_word('hola'))
-        self.assertFalse(scrabble_game.validate_word(''))
+        self.assertFalse(scrabble_game.validate_word('hola2'))
+
+    def test_show_board(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        self.assertEqual(scrabble_game.show_board(), scrabble_game.board.show_board())
+
+    def test_show_player_tiles(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.next_turn()
+        scrabble_game.distribute_tiles()
+        self.assertEqual(scrabble_game.show_player_tiles(), scrabble_game.current_player.show_tiles())
 
 
 class TestGameEnd(unittest.TestCase):
     def test_end_game(self):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertFalse(scrabble_game.end_game())
-        scrabble_game.bag_tiles=[]
+        scrabble_game.tilebag=[]
         self.assertTrue(scrabble_game.end_game())
 
 

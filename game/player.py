@@ -15,3 +15,10 @@ class Player:
             tiles_to_change.append(self.tiles[player_old_tiles_index[tile_index]-1])
             self.tiles[player_old_tiles_index[tile_index]-1]=player_new_tiles[player_old_tiles_index[tile_index]-1]
         return tiles_to_change
+    
+    def show_tiles(self):
+        tiles=[]
+        for tile in self.tiles:
+            tiles.append(tile.letter)
+        return tiles
+    

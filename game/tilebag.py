@@ -27,7 +27,7 @@ class JokerTile(Tile):
         for i in DATA:
             if i['letter']==letter_joker.upper():
                 self.letter=letter_joker.upper()
-                self.value=i['value']
+                self.value=0
                 break
         else:
             raise EmptyTiles    
@@ -40,13 +40,13 @@ class TileBag:
                 self.tiles.append(Tile(i.get("letter"),i.get("value")))
         random.shuffle(self.tiles)
  
-    def draw_tiles(self,cantidad):
+    def draw_tiles(self,quantity):
         tile_drawn=[]
         try:
-            if cantidad>len(self.tiles):
+            if quantity>len(self.tiles):
                 raise TooMuchTiles
             else:
-                for i in range(cantidad):
+                for i in range(quantity):
                     tile_drawn.append(self.tiles.pop())
                 return tile_drawn
         except TooMuchTiles:
