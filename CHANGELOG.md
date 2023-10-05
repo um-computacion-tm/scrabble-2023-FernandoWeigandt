@@ -12,6 +12,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Development.
 
+## (0.1.4) V 5-10-23
+
+### Added
+
+- Put word method in Board Class.
+- Test for Put word method in Board Class.
+
+### Changed
+
+- Nothing at the moment.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
+
+## Status
+
+- Development.
+
 ## (0.1.3) V 04-10-23
 
 ### Added
@@ -28,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Test for Distribute Tiles method in Scrabble Game Class.
 
 ### Removed
+
 - Put word method in Board Class.
 - Test for Put word method in Board Class.
 

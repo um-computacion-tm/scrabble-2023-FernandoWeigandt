@@ -93,7 +93,7 @@ class TestBoard(unittest.TestCase):
         board.grid[7][8].letter = Tile('a',1)
         board.grid[7][9].letter = Tile('s',2)
         board.grid[7][10].letter = Tile('a',1)
-        board.show_board()
+        
 
     def test_show_board_with_words(self):
         board=Board()
@@ -175,6 +175,32 @@ class TestBoard(unittest.TestCase):
         location = (8,6)
         self.assertEqual(board.validate_word_place_board(word, location, orientation),True)
 
+    def test_put_word(self):
+        board=Board()
+        word = 'casa'
+        location = (7,7)
+        orientation = 'H'
+        board.put_word(word,location,orientation)
+        self.assertEqual(board.grid[7][7].letter,'c')
+        self.assertEqual(board.grid[7][8].letter,'a')
+        self.assertEqual(board.grid[7][9].letter,'s')
+        self.assertEqual(board.grid[7][10].letter,'a')
+        
+
+    def test_put_word_vertical(self):
+        board=Board()
+        word = 'facultad'
+        location = (7,7)
+        orientation = 'V'
+        board.put_word(word,location,orientation)
+        self.assertEqual(board.grid[7][7].letter,'f')
+        self.assertEqual(board.grid[8][7].letter,'a')
+        self.assertEqual(board.grid[9][7].letter,'c')
+        self.assertEqual(board.grid[10][7].letter,'u')
+        self.assertEqual(board.grid[11][7].letter,'l')
+        self.assertEqual(board.grid[12][7].letter,'t')
+        self.assertEqual(board.grid[13][7].letter,'a')
+        self.assertEqual(board.grid[14][7].letter,'d')
     
 if __name__ == '__main__':
     unittest.main()

@@ -29,8 +29,8 @@ class TestGameInitialization(unittest.TestCase):
     
     def test_validate_word(self):
         scrabble_game = ScrabbleGame(players_count=3)
-        self.assertTrue(scrabble_game.validate_word('hola'))
-        self.assertFalse(scrabble_game.validate_word('hola2'))
+        self.assertEqual(scrabble_game.validate_word('facultad'), True)
+        self.assertEqual(scrabble_game.validate_word('facultad1'), False)
 
     def test_show_board(self):
         scrabble_game = ScrabbleGame(players_count=3)
