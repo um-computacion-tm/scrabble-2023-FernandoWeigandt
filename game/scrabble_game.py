@@ -29,7 +29,7 @@ class ScrabbleGame:
         return self.board.validate_word(word)
         
     def show_board(self):
-        return self.board.show_board()
+        return self.board.__repr__
     
     def show_player_tiles(self):
         return self.current_player.show_tiles()

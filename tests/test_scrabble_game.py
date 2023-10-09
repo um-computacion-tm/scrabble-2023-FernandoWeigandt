@@ -34,7 +34,7 @@ class TestGameInitialization(unittest.TestCase):
 
     def test_show_board(self):
         scrabble_game = ScrabbleGame(players_count=3)
-        self.assertEqual(scrabble_game.show_board(), scrabble_game.board.show_board())
+        self.assertEqual(scrabble_game.show_board(), scrabble_game.board.__repr__)
 
     def test_show_player_tiles(self):
         scrabble_game = ScrabbleGame(players_count=3)

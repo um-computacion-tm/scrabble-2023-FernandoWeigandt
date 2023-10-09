@@ -1,6 +1,7 @@
 from game.tilebag import Tile
 from game.cell import Cell
 from pyrae import dle
+from game.cell import Cell
 
 class Board():
     def __init__(self,grid=None):
@@ -86,22 +87,27 @@ class Board():
             else:
                 return False    
 
-    def show_board(self):
-        print('')
-        columnas = ['   ','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O']
-        print("  ".join(columnas))
-        print('-------------------------------------------------')
-        filas  = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15']
-        for i in range(15):
-            print(filas[i], end='|  ')
-            for j in range(15):
+    def __repr__(self):
+        view = '       '
+        col = ' ABCDEFGHIJKLMNO'
+        view += '\n'
+        for i in col:
+            view += ' ' + i + '  '
+        view += '\n'
+        for i in range(len(self.grid)):
+            if i < 9:
+                view += ' ' + str(i+1) + ' '
+            else:
+                view += str(i+1) + ' '
+            for j in range(len(self.grid[i])):
                 if self.grid[i][j].letter is None:
-                    print('-', end='  ')
+                    view += '  | '
                 else:
-                    print(self.grid[i][j].letter.letter.upper(), end='  ')
-            print('')
-        print('')   
-
+                    view += self.grid[i][j].letter.letter.upper() + ' | '
+            view += '\n' 
+        return view
+    
+    
     def put_word(self, word, location, orientation):
         if orientation == 'H':
             for i in range(len(word)):
@@ -109,4 +115,6 @@ class Board():
         else:
             for i in range(len(word)):
                 self.grid[location[0]+i][location[1]].letter = word[i]
+
+
 

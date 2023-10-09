@@ -83,9 +83,6 @@ class TestBoard(unittest.TestCase):
         orientation = 'V'
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
         
-    def test_show_board(self):
-        board = Board()
-        board.show_board()
 
     def test_show_board_with_word(self):
         board = Board()
@@ -93,21 +90,9 @@ class TestBoard(unittest.TestCase):
         board.grid[7][8].letter = Tile('a',1)
         board.grid[7][9].letter = Tile('s',2)
         board.grid[7][10].letter = Tile('a',1)
-        
+        print(board)
 
-    def test_show_board_with_words(self):
-        board=Board()
-        'Palabra 1'
-        board.grid[7][7].letter = Tile('c',1)
-        board.grid[7][8].letter = Tile('a',1)
-        board.grid[7][9].letter = Tile('s',2)
-        board.grid[7][10].letter = Tile('a',1)
-        'Palabra 2'
-        board.grid[5][7].letter = Tile('s',2)
-        board.grid[6][7].letter = Tile('a',1)
-        board.grid[7][7].letter = Tile('c',1)
-        board.grid[8][7].letter = Tile('a',1)
-        board.show_board()
+
 
     def test_show_overlapping_words(self):
         board=Board()
