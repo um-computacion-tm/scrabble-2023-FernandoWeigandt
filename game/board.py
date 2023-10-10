@@ -6,6 +6,29 @@ from game.cell import Cell
 class Board():
     def __init__(self,grid=None):
         self.grid = [[ Cell(1, '') for _ in range(15) ]for _ in range(15)]
+        self.assign_multipliers()
+        
+    def assign_multipliers(self):
+        
+        letter_multipliers = (
+            (0, 3), (0, 11), (1, 5), (1, 9), (2, 6), (2, 8), (3, 0), (3, 7), (3, 14),
+            (5, 1), (5, 5), (5, 9), (5, 13), (6, 2), (6, 6), (6, 8), (6, 12), (7, 3), (7, 11),
+            (8, 2), (8, 6), (8, 8), (8, 12), (9, 1), (9, 13), (11, 0), (11, 7), (11, 14),
+            (12, 2), (12, 12), (13, 1), (13, 13), (14, 0), (14, 7), (14, 14)
+        )
+        word_multipliers = (
+            (0, 0), (0, 7), (0, 14), (3, 3), (3, 11), (5, 5), (5, 9), (6, 6), (6, 8), (7, 0),
+            (7, 14), (7, 7), (8, 6), (8, 8), (11, 3), (11, 11), (12, 2), (12, 12), (14, 0),
+            (14, 7), (14, 14)
+        )
+        for row in range(len(self.grid)):
+            for col in range(len(self.grid[row])):
+                if (row, col) in letter_multipliers:
+                    self.grid[row][col] = Cell(2 if (row, col) in ((0, 3), (0, 11), (3, 0), (3, 7), (3, 14), (5, 1), (5, 13), (6, 2), (6, 12), (7, 3), (7, 11)) else 3, 'letter', '', True)
+                elif (row, col) in word_multipliers:
+                    self.grid[row][col] = Cell(2 if (row, col) in ((0, 3), (0, 11), (1, 5), (1, 9), (2, 6), (2, 8), (3, 0), (3, 14), (5, 9), (6, 8), (7, 0), (7, 14), (11, 0), (11, 14), (12, 2), (12, 12), (14, 0), (14, 7), (14, 14)) else 3, 'word', '', True)
+                else:
+                    self.grid[row][col] = Cell(1, '', '', False)
 
 
     def calculate_word_value(self, word):
@@ -96,12 +119,21 @@ class Board():
         view += '\n'
         for i in range(len(self.grid)):
             if i < 9:
-                view += ' ' + str(i+1) + ' '
+                view += '  ' + str(i+1) + '  '
             else:
-                view += str(i+1) + ' '
+                view += '  ' + str(i+1) + ' '
             for j in range(len(self.grid[i])):
                 if self.grid[i][j].letter is None:
-                    view += '  | '
+                    if self.grid[i][j].multiplier_type == 'word' and self.grid[i][j].multiplier == 3:
+                        view += '3W| '
+                    elif self.grid[i][j].multiplier_type == 'word' and self.grid[i][j].multiplier == 2:
+                        view += '2W| '
+                    elif self.grid[i][j].multiplier_type == 'letter' and self.grid[i][j].multiplier == 3:
+                        view += '3L| '
+                    elif self.grid[i][j].multiplier_type == 'letter' and self.grid[i][j].multiplier == 2:
+                        view += '2L| '
+                    else:
+                        view += '  | '
                 else:
                     view += self.grid[i][j].letter.letter.upper() + ' | '
             view += '\n' 
