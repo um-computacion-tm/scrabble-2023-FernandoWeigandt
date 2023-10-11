@@ -84,7 +84,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
         
 
-    def test_show_board_with_word(self):
+    def test_show_board(self):
         board = Board()
         board.grid[7][7].letter = Tile('c',1)
         board.grid[7][8].letter = Tile('a',1)
