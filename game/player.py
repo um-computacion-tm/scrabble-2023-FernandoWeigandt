@@ -22,3 +22,14 @@ class Player:
             tiles.append(tile.letter)
         return tiles
     
+    def show_tiles_index(self):
+        tiles=[]
+        for tile in range(len(self.tiles)):
+            tiles.append(tile+1)
+        return tiles
+    
+    def show_tiles_points(self):
+        tiles=[]
+        for tile in self.tiles:
+            tiles.append(tile.value)
+        return tiles

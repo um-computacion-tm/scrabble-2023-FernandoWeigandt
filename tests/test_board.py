@@ -90,7 +90,7 @@ class TestBoard(unittest.TestCase):
         board.grid[7][8].letter = Tile('a',1)
         board.grid[7][9].letter = Tile('s',2)
         board.grid[7][10].letter = Tile('a',1)
-        print(board)
+        print(board.show_board())
 
 
 
@@ -186,6 +186,17 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[12][7].letter,'t')
         self.assertEqual(board.grid[13][7].letter,'a')
         self.assertEqual(board.grid[14][7].letter,'d')
+
+
+    def test_remove_accent(self):
+        board=Board()
+        word = 'papá'
+        self.assertEqual(board.remove_accent(word),'papa')
+
+    def test_remove_accent_false(self):
+        board=Board()
+        word = 'papa'
+        self.assertEqual(board.remove_accent(word),'papa')
     
 if __name__ == '__main__':
     unittest.main()

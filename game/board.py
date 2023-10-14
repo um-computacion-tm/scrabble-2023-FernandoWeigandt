@@ -109,7 +109,7 @@ class Board():
             else:
                 return False    
 
-    def __repr__(self):
+    def show_board(self):
         view = '       '
         col = ' ABCDEFGHIJKLMNO'
         view += '\n'
@@ -146,6 +146,15 @@ class Board():
         else:
             for i in range(len(word)):
                 self.grid[location[0]+i][location[1]].letter = word[i]
+
+    def remove_accent(self, word):
+        word = word.replace('á', 'a')
+        word = word.replace('é', 'e')
+        word = word.replace('í', 'i')
+        word = word.replace('ó', 'o')
+        word = word.replace('ú', 'u')
+        return word
+    
 
 
 

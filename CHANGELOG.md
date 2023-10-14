@@ -12,6 +12,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Development.
 
+## (0.1.5) V 14-10-23
+
+### Added
+
+- Remove accented letters method in Board Class.
+- Test for Remove accented letters method in Board Class.
+- Show Tile index and points method in Player Class.
+- Test for Show Tile index and points method in Player Class.
+
+### Changed
+
+- Show Board method in Board Class.
+- Test for Show Board method in Board Class.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
+
+## Status
+
+- Development.
+
 ## (0.1.4) V 5-10-23
 
 ### Added
