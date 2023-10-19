@@ -11,13 +11,7 @@ class ScrabbleGame:
         self.tilebag = TileBag()
         self.players = [Player(number=number) for number in range(players_count)]
         self.current_player = None
-
-    # def play(self, word, location, orientation):
-    #     self.validate_word(word)
-    #     self.board.put_word(word, location, orientation)
-    #     total = Board().calculate_word_value(word)
-    #     self.players[self.current_player].score += total
-    #     self.next_turn()
+        self.round = 0
 
     def next_turn(self):
         if self.current_player == None:

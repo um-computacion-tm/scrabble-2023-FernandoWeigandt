@@ -42,13 +42,6 @@ class TestGameInitialization(unittest.TestCase):
         scrabble_game.distribute_tiles()
         self.assertEqual(scrabble_game.show_player_tiles(), scrabble_game.current_player.show_tiles())
 
-    # def test_play(self):
-    #     scrabble_game = ScrabbleGame(players_count=3)
-    #     scrabble_game.distribute_tiles()
-    #     scrabble_game.play('facultad', (7, 4), 'H')
-    #     self.assertEqual(scrabble_game.current_player.score, 14)
-    #     self.assertEqual(len(scrabble_game.current_player.tiles), 7)
-    #     self.assertEqual(len(scrabble_game.tilebag), 93)
 
 class TestGameEnd(unittest.TestCase):
     def test_end_game(self):

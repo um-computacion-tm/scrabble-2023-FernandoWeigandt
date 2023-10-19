@@ -86,13 +86,11 @@ class TestBoard(unittest.TestCase):
 
     def test_show_board(self):
         board = Board()
-        board.grid[7][7].letter = Tile('c',1)
-        board.grid[7][8].letter = Tile('a',1)
-        board.grid[7][9].letter = Tile('s',2)
-        board.grid[7][10].letter = Tile('a',1)
+        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
+        location = (7,7)
+        orientation = 'H'
+        board.put_word(word,location,orientation)
         print(board.show_board())
-
-
 
     def test_show_overlapping_words(self):
         board=Board()

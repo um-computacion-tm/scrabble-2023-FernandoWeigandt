@@ -49,5 +49,11 @@ class TestPlayer(unittest.TestCase):
         player.add_tiles(tiles)
         self.assertEqual(player.show_tiles_points(),[1,1,1])
 
-
+    def test_remove_tiles(self):
+        player=Player('Fernando',0,0,TileBag())
+        tiles=[Tile('A',1),Tile('B',1),Tile('C',1)]
+        player.add_tiles(tiles)
+        player.remove_tiles([player.tiles[0],player.tiles[1]])
+        self.assertEqual(len(player.tiles),1)
+        self.assertEqual(player.tiles[0].letter,'C')
 

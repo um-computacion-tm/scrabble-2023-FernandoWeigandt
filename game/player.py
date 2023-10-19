@@ -22,6 +22,10 @@ class Player:
             tiles.append(tile.letter)
         return tiles
     
+    def remove_tiles(self,tiles):
+        for tile in tiles:
+            self.tiles.remove(tile)
+    
     def show_tiles_index(self):
         tiles=[]
         for tile in range(len(self.tiles)):

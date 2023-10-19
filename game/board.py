@@ -16,29 +16,18 @@ class Board():
             for col in range(len(self.grid[row])):
                 if (row, col) in LETTER_MULTIPLIERS:
                     if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)):
-                        multiplier = 2
-                    else:
                         multiplier = 3
+                    else:
+                        multiplier = 2
                     self.grid[row][col] = Cell(multiplier, 'letter', '', True)
                 elif (row, col) in WORD_MULTIPLIERS:
-                    if (row, col) in ((0, 0), (7, 0), (0, 7), (7, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
-                        multiplier = 2
-                    else:
+                    if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)):
                         multiplier = 3
+                    else:
+                        multiplier = 2
                     self.grid[row][col] = Cell(multiplier, 'word', '', True)
                 else:
                     self.grid[row][col] = Cell(1, '', '', False)
-
-
-    def calculate_word_value(self, word):
-        value = 0
-        for cell in word:
-            value += cell.calculate_value()
-        for cell in word:
-            if cell.multiplier_type == 'word':
-                value *= cell.multiplier
-                cell.multiplier = 1
-        return value
     
 
     def is_empty(self):
