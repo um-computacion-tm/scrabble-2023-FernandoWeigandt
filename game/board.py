@@ -71,32 +71,7 @@ class Board():
             return False
         else:
             return True
-        
-
-    def validate_word_place_board(self, word, location, orientation):
-        if self.validate_word(word):
-            h_space = len(word) <= len(self.grid)-location[0]
-            v_space = len(word) <= len(self.grid)-location[1]
-            intersections = 0
-            is_valid = 0
-            if (orientation=='H' and h_space):
-                for i in range(len(word)):
-                    cell = self.grid[location[0]][location[1]+i].letter
-                    if cell is not None:
-                        intersections += 1
-                        if cell.letter == word[i]:
-                            is_valid += 1
-            elif ((not orientation=='H') and v_space):
-                for i in range(len(word)):
-                    cell = self.grid[location[0]+i][location[1]].letter
-                    if cell is not None:
-                        intersections += 1
-                        if cell.letter == word[i]:
-                            is_valid += 1
-            if is_valid != 0 and intersections == is_valid:
-                return True
-            else:
-                return False    
+           
 
     def show_board(self):
         view = '       '
@@ -106,10 +81,10 @@ class Board():
             view += ' ' + i + '  '
         view += '\n'
         for i in range(len(self.grid)):
-            if i < 9:
-                view += '  ' + str(i+1) + '  '
+            if i <= 9:
+                view += '  ' + str(i) + '  '
             else:
-                view += '  ' + str(i+1) + ' '
+                view += '  ' + str(i) + ' '
             for j in range(len(self.grid[i])):
                 if self.grid[i][j].letter is None:
                     if self.grid[i][j].multiplier_type == 'word' and self.grid[i][j].multiplier == 3:
@@ -123,13 +98,13 @@ class Board():
                     else:
                         view += '  | '
                 else:
-                    view += self.grid[i][j].letter.letter.upper() + ' | '
+                    view += self.grid[i][j].letter.upper() + ' | '
             view += '\n' 
         return view
     
     
     def put_word(self, word, location, orientation):
-        if orientation == 'H':
+        if orientation.upper()== 'H':
             for i in range(len(word)):
                 self.grid[location[0]][location[1]+i].letter = word[i]
         else:
