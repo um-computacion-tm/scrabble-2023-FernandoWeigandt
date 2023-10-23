@@ -71,6 +71,18 @@ class Board():
             return False
         else:
             return True
+        
+    #Funcion que valide que las palabras se crucen
+    def validate_crossing_words(self, word, location, orientation):
+        if orientation == 'H':
+            for i in range(len(word)):
+                if self.grid[location[0]][location[1]+i].letter is not None:
+                    return True
+        else:
+            for i in range(len(word)):
+                if self.grid[location[0]+i][location[1]].letter is not None:
+                    return True
+        return False
            
 
     def show_board(self):

@@ -82,10 +82,10 @@ class GameInterface:
                 self.play_turn()
         else:
             if self.board.validate_word(word):
-                if self.board.validate_len_of_word_in_board(word,location,orientation):
+                if self.board.validate_len_of_word_in_board(word,location,orientation) and self.board.validate_crossing_words(word,location,orientation):
                     self.board.put_word(word,location,orientation)
                 else:
-                    print('La palabra no se puede jugar en esa posición')
+                    print('La palabra no se puede jugar en esa posición ')
                     self.play_turn()
             else:
                 print('La palabra no es válida')
@@ -94,10 +94,11 @@ class GameInterface:
     def change_tiles(self):
         print(f'{self.current_player.name} Estas son sus fichas:')
         print(self.current_player.show_tiles())
-        print('Ingrese las posicion de las fichas que desea cambiar (ejemplo: 1,2)')
+        print('Ingrese las posicion de las fichas que desea cambiar')
         positions = input()
         positions = positions.split(',')
-
+        positions = [int(i) for i in positions]
+        self.current_player.change_tiles(positions,self.tilebag.draw_tiles(len(positions)))
         print('Se han cambiado las fichas')
         print(self.current_player.show_tiles())
         print('Presione enter para continuar')
@@ -108,11 +109,13 @@ class GameInterface:
         print(self.current_player.show_tiles())
         print('Ingrese la letra que desea que represente el comodín')
         letter = input()
-        #Tengo una funcion change_letter que recibe la letra y la cambia por un comodin
+        self.current_player.change_tiles([1],JokerTile(letter,0))
         print('Se ha cambiado la letra del comodín')
         print(self.current_player.show_tiles())
         print('Presione enter para continuar')
         input()
+
+    
 
 
 if __name__ == '__main__':

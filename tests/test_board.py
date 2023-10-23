@@ -140,6 +140,31 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[13][7].letter,'a')
         self.assertEqual(board.grid[14][7].letter,'d')
 
+    def test_validate_crossing_words(self):
+        board=Board()
+        word = 'casa'
+        location = (7,7)
+        orientation = 'H'
+        board.put_word(word,location,orientation)
+        word1 = 'lazo'
+        location1 = (6,8)
+        orientation1 = 'V'
+        board.put_word(word1,location1,orientation1)
+        print(board.show_board())
+        self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),True)
+
+    def test_validate_crossing_words_false(self):
+        board=Board()
+        word = 'casa'
+        location = (7,7)
+        orientation = 'H'
+        board.put_word(word,location,orientation)
+        word1 = 'faca'
+        location1 = (5,8)
+        orientation1 = 'H'
+        board.put_word(word1,location1,orientation1)
+        print(board.show_board())
+        self.assertEqual(board.validate_crossing_words(word,location,orientation),False)
 
     def test_remove_accent(self):
         board=Board()
