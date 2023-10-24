@@ -136,5 +136,8 @@ class Board():
         return word
     
 
+#Validate board ELio, Change Tiles, Cli Score y etc
+    
+
 
 

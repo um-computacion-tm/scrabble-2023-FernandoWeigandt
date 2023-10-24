@@ -132,30 +132,30 @@ class TestBoard(unittest.TestCase):
 
     def test_put_word(self):
         board=Board()
-        word = 'casa'
+        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (7,7)
         orientation = 'H'
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[7][7].letter,'c')
-        self.assertEqual(board.grid[7][8].letter,'a')
-        self.assertEqual(board.grid[7][9].letter,'s')
-        self.assertEqual(board.grid[7][10].letter,'a')
+        self.assertEqual(board.grid[7][7].letter.letter,'c')
+        self.assertEqual(board.grid[7][8].letter.letter,'a')
+        self.assertEqual(board.grid[7][9].letter.letter,'s')
+        self.assertEqual(board.grid[7][10].letter.letter,'a')
         
 
     def test_put_word_vertical(self):
         board=Board()
-        word = 'facultad'
+        word = [Tile('f',1),Tile('a',1),Tile('c',2),Tile('u',1),Tile('l',1),Tile('t',1),Tile('a',1),Tile('d',1)]
         location = (7,7)
         orientation = 'V'
         board.put_word(word,location,orientation)
-        self.assertEqual(board.grid[7][7].letter,'f')
-        self.assertEqual(board.grid[8][7].letter,'a')
-        self.assertEqual(board.grid[9][7].letter,'c')
-        self.assertEqual(board.grid[10][7].letter,'u')
-        self.assertEqual(board.grid[11][7].letter,'l')
-        self.assertEqual(board.grid[12][7].letter,'t')
-        self.assertEqual(board.grid[13][7].letter,'a')
-        self.assertEqual(board.grid[14][7].letter,'d')
+        self.assertEqual(board.grid[7][7].letter.letter,'f')
+        self.assertEqual(board.grid[8][7].letter.letter,'a')
+        self.assertEqual(board.grid[9][7].letter.letter,'c')
+        self.assertEqual(board.grid[10][7].letter.letter,'u')
+        self.assertEqual(board.grid[11][7].letter.letter,'l')
+        self.assertEqual(board.grid[12][7].letter.letter,'t')
+        self.assertEqual(board.grid[13][7].letter.letter,'a')
+        self.assertEqual(board.grid[14][7].letter.letter,'d')
 
     def test_validate_crossing_words(self):
         board=Board()
