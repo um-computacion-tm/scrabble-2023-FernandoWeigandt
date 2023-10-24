@@ -45,3 +45,10 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(len(player.tiles),1)
         self.assertEqual(player.tiles[0].letter,'C')
 
+    def test_has_tiles(self):
+        player=Player('Fernando',0,0,TileBag())
+        tiles=[Tile('A',1),Tile('B',1),Tile('C',1)]
+        player.add_tiles(tiles)
+        self.assertTrue(player.has_tiles('ABC'))
+        self.assertFalse(player.has_tiles('ABD'))
+

@@ -25,4 +25,9 @@ class Player:
     def remove_tiles(self,tiles):
         for tile in tiles:
             self.tiles.remove(tile)
-    
+
+    def has_tiles(self,word):
+        for letter in word:
+            if letter.upper() not in self.show_tiles():
+                return False
+        return True

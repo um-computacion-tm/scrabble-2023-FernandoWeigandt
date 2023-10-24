@@ -72,17 +72,20 @@ class Board():
         else:
             return True
         
-    #Funcion que valide que las palabras se crucen
+        
     def validate_crossing_words(self, word, location, orientation):
-        if orientation == 'H':
-            for i in range(len(word)):
-                if self.grid[location[0]][location[1]+i].letter is not None:
-                    return True
-        else:
-            for i in range(len(word)):
-                if self.grid[location[0]+i][location[1]].letter is not None:
-                    return True
+        intersections = 0
+        for i in range(len(word)):
+            if orientation == 'H':
+                cell = self.grid[location[0]][location[1]+i]
+            else:
+                cell = self.grid[location[0]+i][location[1]]
+            if cell.letter is not None and cell.letter != word[i]:
+                intersections += 1
+        if intersections != 0:
+            return True
         return False
+
            
 
     def show_board(self):
@@ -110,9 +113,10 @@ class Board():
                     else:
                         view += '  | '
                 else:
-                    view += self.grid[i][j].letter.upper() + ' | '
+                    view += self.grid[i][j].letter.letter.upper() + ' | '
             view += '\n' 
         return view
+        
     
     
     def put_word(self, word, location, orientation):

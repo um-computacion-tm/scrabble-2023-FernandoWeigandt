@@ -32,16 +32,4 @@ class ScrabbleGame:
     def show_board(self):
         return self.board.__repr__
     
-    def show_player_tiles(self):
-        rack = ''
-        for player in self.players:
-            rack += player.show_tiles() + '\n'
-        return rack
-
-    def end_game(self):
-        if  self.tilebag == []:
-            return True
-        else:
-            return False
-        
     

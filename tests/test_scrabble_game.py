@@ -36,19 +36,12 @@ class TestGameInitialization(unittest.TestCase):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertEqual(scrabble_game.show_board(), scrabble_game.board.__repr__)
 
-    def test_show_player_tiles(self):
+    def test_distribute_tiles(self):
         scrabble_game = ScrabbleGame(players_count=3)
-        scrabble_game.next_turn()
         scrabble_game.distribute_tiles()
-        self.assertEqual(scrabble_game.show_player_tiles(), scrabble_game.current_player.show_tiles())
-
-
-class TestGameEnd(unittest.TestCase):
-    def test_end_game(self):
-        scrabble_game = ScrabbleGame(players_count=3)
-        self.assertFalse(scrabble_game.end_game())
-        scrabble_game.tilebag=[]
-        self.assertTrue(scrabble_game.end_game())
+        self.assertEqual(len(scrabble_game.players[0].tiles), 7)
+        self.assertEqual(len(scrabble_game.players[1].tiles), 7)
+        self.assertEqual(len(scrabble_game.players[2].tiles), 7)
 
 
 if __name__ == '__main__':

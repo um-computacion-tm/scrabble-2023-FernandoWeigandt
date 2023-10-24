@@ -74,9 +74,12 @@ class GameInterface:
         print('Ingrese la orientación en la que desea jugar la palabra')
         orientation = input()
         if self.board.is_empty():
-            if location == (7,7) and self.board.validate_word(word):
+            if location == (7,7) and self.board.validate_word(word) and self.current_player.has_tiles(word):
                 self.board.put_word(word,location,orientation)
                 print(self.board.show_board())
+            elif self.current_player.has_tiles(word) == False:
+                print('Usted no tiene las fichas para jugar esa palabra')
+                self.play_turn()
             else:
                 print('La primera palabra debe ser jugada en la posición 7,7')
                 self.play_turn()
@@ -84,6 +87,7 @@ class GameInterface:
             if self.board.validate_word(word):
                 if self.board.validate_len_of_word_in_board(word,location,orientation) and self.board.validate_crossing_words(word,location,orientation):
                     self.board.put_word(word,location,orientation)
+                    print(self.board.show_board())
                 else:
                     print('La palabra no se puede jugar en esa posición ')
                     self.play_turn()
@@ -97,7 +101,8 @@ class GameInterface:
         print('Ingrese las posicion de las fichas que desea cambiar')
         positions = input()
         positions = positions.split(',')
-        positions = [int(i) for i in positions]
+        for i in range(len(positions)):
+            positions[i] = int(positions[i])
         self.current_player.change_tiles(positions,self.tilebag.draw_tiles(len(positions)))
         print('Se han cambiado las fichas')
         print(self.current_player.show_tiles())

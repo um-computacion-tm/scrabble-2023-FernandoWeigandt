@@ -86,11 +86,28 @@ class TestBoard(unittest.TestCase):
 
     def test_show_board(self):
         board = Board()
-        word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
-        location = (7,7)
-        orientation = 'H'
-        board.put_word(word,location,orientation)
-        print(board.show_board())
+        result = board.show_board()
+        expected = '''       
+     A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
+  0  3W|   |   | 2L|   |   |   | 3W|   |   |   | 2L|   |   | 3W| 
+  1    | 2W|   |   |   | 3L|   |   |   | 3L|   |   |   | 2W|   | 
+  2    |   | 2W|   |   |   | 2L|   | 2L|   |   |   | 2W|   |   | 
+  3  2L|   |   | 2W|   |   |   | 2L|   |   |   | 2W|   |   | 2L| 
+  4    |   |   |   | 2W|   |   |   |   |   | 2W|   |   |   |   | 
+  5    | 3L|   |   |   | 3L|   |   |   | 3L|   |   |   | 3L|   | 
+  6    |   | 2L|   |   |   | 2L|   | 2L|   |   |   | 2L|   |   | 
+  7  3W|   |   | 2L|   |   |   | 2W|   |   |   | 2L|   |   | 3W| 
+  8    |   | 2L|   |   |   | 2L|   | 2L|   |   |   | 2L|   |   | 
+  9    | 3L|   |   |   | 3L|   |   |   | 3L|   |   |   | 3L|   | 
+  10   |   |   |   | 2W|   |   |   |   |   | 2W|   |   |   |   | 
+  11 2L|   |   | 2W|   |   |   | 2L|   |   |   | 2W|   |   | 2L| 
+  12   |   | 2W|   |   |   | 2L|   | 2L|   |   |   | 2W|   |   | 
+  13   | 2W|   |   |   | 3L|   |   |   | 3L|   |   |   | 2W|   | 
+  14 3W|   |   | 2L|   |   |   | 3W|   |   |   | 2L|   |   | 3W| 
+'''
+        self.maxDiff = None
+        self.assertEqual(result, expected)
+    
 
     def test_show_overlapping_words(self):
         board=Board()
@@ -142,29 +159,30 @@ class TestBoard(unittest.TestCase):
 
     def test_validate_crossing_words(self):
         board=Board()
-        word = 'casa'
-        location = (7,7)
-        orientation = 'H'
-        board.put_word(word,location,orientation)
+        board.grid[7][7].letter = Tile('C',1)
+        board.grid[7][8].letter = Tile('A',1)
+        board.grid[7][9].letter = Tile('S',2)
+        board.grid[7][10].letter = Tile('A',1)
+        board.grid[6][8].letter = Tile('L',1)
+        board.grid[8][8].letter = Tile('Z',1)
+        board.grid[9][8].letter = Tile('O',1)
+        print(board.show_board())
         word1 = 'lazo'
         location1 = (6,8)
         orientation1 = 'V'
-        board.put_word(word1,location1,orientation1)
-        print(board.show_board())
         self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),True)
 
     def test_validate_crossing_words_false(self):
         board=Board()
-        word = 'casa'
-        location = (7,7)
-        orientation = 'H'
-        board.put_word(word,location,orientation)
+        board.grid[7][7].letter = Tile('C',1)
+        board.grid[7][8].letter = Tile('A',1)
+        board.grid[7][9].letter = Tile('S',2)
+        board.grid[7][10].letter = Tile('A',1)
         word1 = 'faca'
         location1 = (5,8)
         orientation1 = 'H'
-        board.put_word(word1,location1,orientation1)
         print(board.show_board())
-        self.assertEqual(board.validate_crossing_words(word,location,orientation),False)
+        self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),False)
 
     def test_remove_accent(self):
         board=Board()
