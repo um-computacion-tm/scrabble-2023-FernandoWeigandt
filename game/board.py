@@ -36,15 +36,16 @@ class Board():
     
 
     def validate_init_of_game(self, word, location, orientation):
-                center_row, center_col = 7, 7
-                if orientation == "H":
-                    word_coords = [(location[0], location[1] + i) for i in range(len(word))]
-                elif orientation == "V":
-                    word_coords = [(location[0] + i, location[1]) for i in range(len(word))]
-                for coord in word_coords:
-                    if coord == (center_row, center_col):
-                        return True
-                return False
+        center_row = 7
+        center_col = 7
+        if orientation == "H":
+            word_coords = [(location[0], location[1] + i) for i in range(len(word))]
+        elif orientation == "V":
+            word_coords = [(location[0] + i, location[1]) for i in range(len(word))]
+        for coord in word_coords:
+            if coord == (center_row, center_col):
+                return True
+        return False
         
 
     def validate_len_of_word_in_board(self, word, location, orientation):
@@ -135,8 +136,23 @@ class Board():
         word = word.replace('ú', 'u')
         return word
     
+    # def calculated_points(self, word, location, orientation):
+    #     points = 0
+    #     word_multiplier = 1
+    #     for i in range(len(word)):
+    #         if orientation == 'H':
+    #             cell = self.grid[location[0]][location[1]+i]
+    #         else:
+    #             cell = self.grid[location[0]+i][location[1]]
+    #         if cell.multiplier_type == 'word':
+    #             word_multiplier *= cell.multiplier
+    #         if cell.multiplier_type == 'letter':
+    #             points += cell.multiplier * word[i].points
+    #         else:
+    #             points += word[i].points
+    #     return points * word_multiplier
 
-#Validate board ELio, Change Tiles, Cli Score y etc
+#Change Tiles, Cli Score y etc
     
 
 

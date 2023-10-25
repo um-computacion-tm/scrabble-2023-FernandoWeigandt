@@ -108,6 +108,33 @@ class TestBoard(unittest.TestCase):
         self.maxDiff = None
         self.assertEqual(result, expected)
     
+    def test_show_board(self):
+        board = Board()
+        board.grid[7][7].letter = Tile('c',1)
+        board.grid[7][8].letter = Tile('a',1)
+        board.grid[7][9].letter = Tile('s',2)
+        board.grid[7][10].letter = Tile('a',1)
+        result = board.show_board()
+        expected = '''       
+     A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
+  0  3W|   |   | 2L|   |   |   | 3W|   |   |   | 2L|   |   | 3W| 
+  1    | 2W|   |   |   | 3L|   |   |   | 3L|   |   |   | 2W|   | 
+  2    |   | 2W|   |   |   | 2L|   | 2L|   |   |   | 2W|   |   | 
+  3  2L|   |   | 2W|   |   |   | 2L|   |   |   | 2W|   |   | 2L| 
+  4    |   |   |   | 2W|   |   |   |   |   | 2W|   |   |   |   | 
+  5    | 3L|   |   |   | 3L|   |   |   | 3L|   |   |   | 3L|   | 
+  6    |   | 2L|   |   |   | 2L|   | 2L|   |   |   | 2L|   |   | 
+  7  3W|   |   | 2L|   |   |   | C | A | S | A | 2L|   |   | 3W| 
+  8    |   | 2L|   |   |   | 2L|   | 2L|   |   |   | 2L|   |   | 
+  9    | 3L|   |   |   | 3L|   |   |   | 3L|   |   |   | 3L|   | 
+  10   |   |   |   | 2W|   |   |   |   |   | 2W|   |   |   |   | 
+  11 2L|   |   | 2W|   |   |   | 2L|   |   |   | 2W|   |   | 2L| 
+  12   |   | 2W|   |   |   | 2L|   | 2L|   |   |   | 2W|   |   | 
+  13   | 2W|   |   |   | 3L|   |   |   | 3L|   |   |   | 2W|   | 
+  14 3W|   |   | 2L|   |   |   | 3W|   |   |   | 2L|   |   | 3W| 
+'''
+        self.maxDiff = None
+        self.assertEqual(result, expected)
 
     def test_show_overlapping_words(self):
         board=Board()
@@ -166,7 +193,6 @@ class TestBoard(unittest.TestCase):
         board.grid[6][8].letter = Tile('L',1)
         board.grid[8][8].letter = Tile('Z',1)
         board.grid[9][8].letter = Tile('O',1)
-        print(board.show_board())
         word1 = 'lazo'
         location1 = (6,8)
         orientation1 = 'V'
@@ -181,7 +207,6 @@ class TestBoard(unittest.TestCase):
         word1 = 'faca'
         location1 = (5,8)
         orientation1 = 'H'
-        print(board.show_board())
         self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),False)
 
     def test_remove_accent(self):

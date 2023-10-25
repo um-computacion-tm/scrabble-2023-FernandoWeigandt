@@ -14,6 +14,7 @@ class ScrabbleGame:
         self.round = 0
 
     def next_turn(self):
+        self.round += 1
         if self.current_player == None:
             self.current_player = self.players[0]
         elif self.current_player == self.players[-1]:
@@ -22,14 +23,24 @@ class ScrabbleGame:
             index=self.players.index(self.current_player)+1
             self.current_player=self.players[index]   
     
-    def distribute_tiles(self):
-        for player in self.players:
-            player.add_tiles(self.tilebag.draw_tiles(7))
-
     def validate_word(self, word):
         return self.board.validate_word(word)
         
     def show_board(self):
         return self.board.__repr__
     
+    def change_tiles(self, old_tiles_index=[]):
+        new_tiles=self.tilebag.draw_tiles(len(old_tiles_index))
+        old_tiles = []
+        for i in old_tiles_index:
+            old_tiles.append(self.current_player.tiles[i-1])
+            self.current_player.tiles[i-1] = new_tiles.pop(0)
+        self.tilebag.put_tiles(old_tiles)
+        return old_tiles
     
+    # def show_points(self):
+    #     return self.current_player.score
+    
+    # def calculated_points(self, word):
+    #     return self.board.calculated_points(word)
+  

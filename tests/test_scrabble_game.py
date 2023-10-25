@@ -1,7 +1,8 @@
 import unittest
 from game.scrabble_game import ScrabbleGame 
-from game.tilebag import TileBag
+from game.tilebag import TileBag , Tile
 from game.player import Player
+from unittest.mock import patch
 
 class TestGameInitialization(unittest.TestCase):
     def test_init(self):
@@ -36,12 +37,24 @@ class TestGameInitialization(unittest.TestCase):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertEqual(scrabble_game.show_board(), scrabble_game.board.__repr__)
 
-    def test_distribute_tiles(self):
-        scrabble_game = ScrabbleGame(players_count=3)
-        scrabble_game.distribute_tiles()
-        self.assertEqual(len(scrabble_game.players[0].tiles), 7)
-        self.assertEqual(len(scrabble_game.players[1].tiles), 7)
-        self.assertEqual(len(scrabble_game.players[2].tiles), 7)
+
+    @patch('game.tilebag.TileBag.draw_tiles')
+    def test_change_tiles(self, mock_take_tiles):
+        scrabble = ScrabbleGame(2)
+        initial_value = len(scrabble.tilebag.tiles)
+        scrabble.current_player = scrabble.players[0]
+        tileA = Tile('A',1)
+        tileE = Tile('A',1)
+        tileF = Tile('F',1)
+        scrabble.players[0].tiles = [tileA,tileE,tileE,tileA,tileA,tileA,tileA]
+        mock_take_tiles.return_value = [tileF,tileF]
+        scrabble.change_tiles((2,3))
+        expected = [tileA,tileF,tileF,tileA,tileA,tileA,tileA]
+        self.assertEqual(scrabble.players[0].tiles, expected)
+        self.assertEqual(len(scrabble.tilebag.tiles), initial_value)
+
+
+
 
 
 if __name__ == '__main__':
