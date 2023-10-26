@@ -15,9 +15,16 @@ class Player:
             tiles.append(tile.letter)
         return tiles
     
-    def remove_tiles(self,tiles):
-        for tile in tiles:
-            self.tiles.remove(tile)
+    def take_tiles(self,word):
+        tiles=[]
+        for letter in word:
+            for tile in self.tiles:
+                if tile.letter==letter.upper():
+                    tiles.append(tile)
+                    self.tiles.remove(tile)
+                    break
+        return tiles
+        
 
     def has_tiles(self,word):
         for letter in word:

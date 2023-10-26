@@ -27,13 +27,15 @@ class TestPlayer(unittest.TestCase):
         player.add_tiles(tiles)
         self.assertEqual(player.show_tiles(),['A','B','C'])
 
-    def test_remove_tiles(self):
+    def test_take_tiles(self):
         player=Player('Fernando',0,0,TileBag())
-        tiles=[Tile('A',1),Tile('B',1),Tile('C',1)]
+        tileA = Tile('A',1)
+        tileB = Tile('B',1)
+        tileC = Tile('C',1)
+        tiles=[tileA,tileB,tileC]
         player.add_tiles(tiles)
-        player.remove_tiles([player.tiles[0],player.tiles[1]])
-        self.assertEqual(len(player.tiles),1)
-        self.assertEqual(player.tiles[0].letter,'C')
+        self.assertEqual(player.take_tiles('AB'),[tileA,tileB])
+        self.assertEqual(player.tiles,[tileC])
 
     def test_has_tiles(self):
         player=Player('Fernando',0,0,TileBag())

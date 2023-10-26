@@ -38,9 +38,3 @@ class ScrabbleGame:
         self.tilebag.put_tiles(old_tiles)
         return old_tiles
     
-    # def show_points(self):
-    #     return self.current_player.score
-    
-    # def calculated_points(self, word):
-    #     return self.board.calculated_points(word)
-  

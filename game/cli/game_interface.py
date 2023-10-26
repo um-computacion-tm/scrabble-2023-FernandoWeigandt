@@ -84,6 +84,8 @@ class GameInterface:
         if self.scrabble.board.is_empty():
             if location == (7,7) and self.scrabble.board.validate_word(word) and self.scrabble.current_player.has_tiles(word):
                 self.scrabble.board.put_word(word,location,orientation)
+                self.scrabble.current_player.take_tiles(word)
+                self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                 print(self.scrabble.board.show_board())
             elif self.scrabble.current_player.has_tiles(word) == False:
                 print('Usted no tiene las fichas para jugar esa palabra')
@@ -98,6 +100,8 @@ class GameInterface:
             if self.scrabble.board.validate_word(word):
                 if self.scrabble.board.validate_len_of_word_in_board(word,location,orientation) and self.scrabble.board.validate_crossing_words(word,location,orientation):
                     self.scrabble.board.put_word(word,location,orientation)
+                    self.scrabble.current_player.take_tiles(word)
+                    self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                     print(self.scrabble.board.show_board())
                 else:
                     print('La palabra no se puede jugar en esa posición ')
