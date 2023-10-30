@@ -1,7 +1,8 @@
 from game.tilebag import Tile
 from game.cell import Cell
 from pyrae import dle
-from game.cell import Cell
+from game.player import Player
+from diccionario import DATA
 
 class Board():
 
@@ -115,7 +116,3 @@ class Board():
         word = word.replace('ú', 'u')
         return word
     
-
-    
-
-

@@ -31,3 +31,4 @@ class Player:
             if letter.upper() not in self.show_tiles():
                 return False
         return True
+    

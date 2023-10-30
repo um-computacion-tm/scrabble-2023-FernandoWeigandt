@@ -110,10 +110,10 @@ class TestBoard(unittest.TestCase):
     
     def test_show_board_with_word(self):
         board = Board()
-        board.grid[7][7].letter = Tile('c',1)
-        board.grid[7][8].letter = Tile('a',1)
-        board.grid[7][9].letter = Tile('s',2)
-        board.grid[7][10].letter = Tile('a',1)
+        board.grid[7][7].letter = 'C'
+        board.grid[7][8].letter = 'A'
+        board.grid[7][9].letter = 'S'
+        board.grid[7][10].letter = 'A'
         result = board.show_board()
         expected = '''       
      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
@@ -218,6 +218,14 @@ class TestBoard(unittest.TestCase):
         board=Board()
         word = 'papa'
         self.assertEqual(board.remove_accent(word),'papa')
-    
+
+    # def test_calculate_score_with_multipliers(self):
+    #     board=Board()
+    #     word = 'casa'
+    #     location = (7,7)
+    #     orientation = 'H'
+    #     board.put_word(word,location,orientation)
+    #     self.assertEqual(board.calculate_word_value(word,location,orientation),12)
+
 if __name__ == '__main__':
     unittest.main()

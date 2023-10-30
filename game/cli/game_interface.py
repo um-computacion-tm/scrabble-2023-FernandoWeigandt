@@ -17,12 +17,8 @@ class GameInterface:
     def add_players(self):
         try:
             number_of_players = int(input('Ingrese el número de jugadores: '))
-            if number_of_players > 1 and number_of_players < 4:
-                return number_of_players
-            else:
-                print('Ingrese un número de jugadores válido')
-                self.add_players()
-        except ValueError:
+            return number_of_players if (number_of_players > 1 and number_of_players) < 4 else ValueError
+        except:
             print('Ingrese un número de jugadores válido')
             self.add_players()
 
