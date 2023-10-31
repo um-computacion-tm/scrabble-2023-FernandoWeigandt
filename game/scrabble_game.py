@@ -23,8 +23,13 @@ class ScrabbleGame:
             index=self.players.index(self.current_player)+1
             self.current_player=self.players[index]   
     
-    def validate_word(self, word):
-        return self.board.validate_word(word)
+    def validate_all(self, word,location,orientation):
+        if self.board.validate_word(word) and self.board.validate_len_of_word_in_board(word,location,orientation):
+            return True
+        
+    def validate_initial_word(self, word,location,orientation):
+        if self.board.validate_word(word) and self.board.validate_len_of_word_in_board(word,location,orientation) and self.board.is_empty() and self.current_player.has_tiles(word) and self.board.validate_init_of_game(word,location,orientation):
+            return True
         
     def show_board(self):
         return self.board.__repr__

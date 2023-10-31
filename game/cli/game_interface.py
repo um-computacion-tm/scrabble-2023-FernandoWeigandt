@@ -1,4 +1,5 @@
 from game.scrabble_game import ScrabbleGame
+import os
 
 class GameInterface:
 
@@ -28,6 +29,7 @@ class GameInterface:
             for i in range(len(self.scrabble.players)):
                 current_player = self.scrabble.current_player
                 print(f'Es el turno de {current_player.name}')
+                print(f'La Ronda es: {self.scrabble.round}')
                 print('El tablero es:')
                 print(board.show_board())
                 print(f'El jugador {current_player.name} tiene las siguientes fichas:')
@@ -61,6 +63,8 @@ class GameInterface:
                 print('Presione enter para continuar')
                 input()
                 self.scrabble.next_turn()
+                os.system('clear')
+                
 
 
             
@@ -71,16 +75,21 @@ class GameInterface:
         word = input().lower()
         if word == '5':
             return 
-        print('Ingrese la posición en la que desea jugar la palabra (ejemplo: 0,0)')
-        position = input()
-        position = position.split(',')
-        location = (int(position[0]),int(position[1]))
+        print('Ingrese la coordenada de la fila')
+        row = int(input())
+        print('Ingrese la coordenada de la columna')
+        column = int(input())
+        location = (row,column)
         print('Ingrese la orientación en la que desea jugar la palabra')
+        print('1. Horizontal')
+        print('2. Vertical')
         orientation = input()
+        orientation = orientation == '1'
         if self.scrabble.board.is_empty():
-            if location == (7,7) and self.scrabble.board.validate_word(word) and self.scrabble.current_player.has_tiles(word):
-                self.scrabble.board.put_word(word,location,orientation)
-                self.scrabble.current_player.take_tiles(word)
+            if self.scrabble.validate_initial_word(word,location,orientation):
+                word = self.scrabble.board.remove_accent(word)
+                tiles = self.scrabble.current_player.take_tiles(word)
+                self.scrabble.board.put_word(tiles,location,orientation)
                 self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                 print(self.scrabble.board.show_board())
             elif self.scrabble.current_player.has_tiles(word) == False:
@@ -93,15 +102,17 @@ class GameInterface:
                 print('La palabra no se puede jugar en esa posición ')
                 self.play_turn()
         else:
-            if self.scrabble.board.validate_word(word):
-                if self.scrabble.board.validate_len_of_word_in_board(word,location,orientation) and self.scrabble.board.validate_crossing_words(word,location,orientation):
-                    self.scrabble.board.put_word(word,location,orientation)
-                    self.scrabble.current_player.take_tiles(word)
+            if self.scrabble.validate_all(word,location,orientation):
+                word_with_out_intersection = self.scrabble.board.get_word_without_intersections(word,location,orientation)
+                word_with_out_intersection = self.scrabble.board.remove_accent(word_with_out_intersection)
+                if self.scrabble.current_player.has_tiles(word_with_out_intersection):
+                    tiles = self.scrabble.current_player.take_tiles(word_with_out_intersection)
+                    self.scrabble.board.put_word(tiles,location,orientation)
                     self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                     print(self.scrabble.board.show_board())
-                else:
-                    print('La palabra no se puede jugar en esa posición ')
-                    self.play_turn()
+            elif self.scrabble.board.validate_len_of_word_in_board(word,location,orientation) == False:
+                print('La palabra no se puede jugar en esa posición ')
+                self.play_turn()
             else:
                 print('La palabra no es válida')
                 self.play_turn()

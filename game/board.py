@@ -32,33 +32,28 @@ class Board():
     
 
     def validate_init_of_game(self, word, location, orientation):
-        center_row = 7
-        center_col = 7
-        if orientation == "H":
-            word_coords = [(location[0], location[1] + i) for i in range(len(word))]
-        elif orientation == "V":
-            word_coords = [(location[0] + i, location[1]) for i in range(len(word))]
-        for coord in word_coords:
-            if coord == (center_row, center_col):
+        for i in range(len(word)):
+            row = location[0] if orientation else location[0] + i
+            column = location[1] + i if orientation else location[1]
+            if (row, column) == (7, 7):
                 return True
         return False
         
 
     def validate_len_of_word_in_board(self, word, location, orientation):
-        if self.validate_word(word):
-            location_x = location[0]
-            location_y = location[1]
-            len_word = len(word)
-            if orientation == 'H':
-                if location_x + len_word > 15:
-                    return False
-                else:
-                    return True
+        location_x = location[0]
+        location_y = location[1]
+        len_word = len(word)
+        if orientation == True:
+            if location_x + len_word > 15:
+                return False
             else:
-                if location_y + len_word > 15:
-                    return False
-                else:
-                    return True
+                return True
+        else:
+            if location_y + len_word > 15:
+                return False
+            else:
+                return True
 
 
     def validate_word(self, word):
@@ -72,7 +67,7 @@ class Board():
         
     def validate_crossing_words(self, word, location, orientation):
         for i, letter in enumerate(word):
-            row, col = (location[0], location[1] + i) if orientation == 'H' else (location[0] + i, location[1])
+            row, col = (location[0], location[1] + i) if orientation == True else (location[0] + i, location[1])
             cell = self.grid[row][col]
             if cell.letter is not None and cell.letter != letter:
                 return True
@@ -81,7 +76,6 @@ class Board():
 
     def show_board(self):
         view = '       \n     A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  \n'
-        
         for i in range(len(self.grid)):
             view += f'  {i}  ' if i <= 9 else f'  {i} '
             for j in range(len(self.grid[i])):
@@ -93,26 +87,38 @@ class Board():
                         view += f'{cell.multiplier}L| '
                     else:
                         view += '  | '
+
+                elif len(cell.letter) == 2:
+                    view += f'{cell.letter}| '
                 else:
-                    view += f'{cell.letter.upper()} | '
+                    view += f'{cell.letter} | '
             view += '\n' 
         return view
 
         
-    def put_word(self, word, location, orientation):
-        if orientation.upper()== 'H':
-            for i in range(len(word)):
-                self.grid[location[0]][location[1]+i].letter = word[i]
-        else:
-            for i in range(len(word)):
-                self.grid[location[0]+i][location[1]].letter = word[i]
+    def put_word(self,word,pos,horizontal):
+        j=0
+        for i in range(len(word)):
+            cell = self.grid[pos[0]][pos[1]+i+j] if horizontal else self.grid[pos[0]+i+j][pos[1]]
+            while cell.letter:
+                j+=1
+                cell = self.grid[pos[0]][pos[1]+i+j] if horizontal else self.grid[pos[0]+i+j][pos[1]]
+            cell.letter = word[i]
 
 
     def remove_accent(self, word):
-        word = word.replace('á', 'a')
-        word = word.replace('é', 'e')
-        word = word.replace('í', 'i')
-        word = word.replace('ó', 'o')
-        word = word.replace('ú', 'u')
+        word = word.replace('Á','A')
+        word = word.replace('É','E')
+        word = word.replace('Í','I')
+        word = word.replace('Ó','O')
+        word = word.replace('Ú','U')
         return word
     
+    def get_word_without_intersections(self,word,pos,horizontal):
+        result = ''
+        for i in range(len(word)):
+            cell = self.grid[pos[0] + (i if not horizontal else 0)][pos[1] + (i if horizontal else 0)].letter
+            if not cell:
+                result += word[i]
+        return result
+        

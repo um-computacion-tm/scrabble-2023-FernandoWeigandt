@@ -16,6 +16,7 @@ class Player:
         return tiles
     
     def take_tiles(self,word):
+        word = self.split_word(word)
         tiles=[]
         for letter in word:
             for tile in self.tiles:
@@ -25,10 +26,29 @@ class Player:
                     break
         return tiles
         
-
     def has_tiles(self,word):
+        word = self.split_word(word)
         for letter in word:
             if letter.upper() not in self.show_tiles():
                 return False
         return True
     
+    def split_word(self,word):
+        word = word.upper()
+        if 'CH' in word:
+            word = word.replace('CH','1')
+        if 'LL' in word:
+            word = word.replace('LL','2')
+        if 'RR' in word:
+            word = word.replace('RR','3')
+        result = []
+        for letter in word:
+            if letter == '1':
+                result.append('CH')
+            elif letter == '2':
+                result.append('LL')
+            elif letter == '3':
+                result.append('RR')
+            else:
+                result.append(letter)
+        return result

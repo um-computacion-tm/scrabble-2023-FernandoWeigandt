@@ -1,5 +1,6 @@
 import unittest
 from game.board import *
+from unittest.mock import patch
 
 
 class TestBoard(unittest.TestCase):
@@ -24,63 +25,63 @@ class TestBoard(unittest.TestCase):
         board = Board()
         word = 'facultad'
         location = (5,4)
-        orientation = 'H'
+        orientation = True
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
 
     def test_len_of_word_in_board_y(self):
         board = Board()
         word = 'facultad'
         location = (5,4)
-        orientation = 'V'
+        orientation = False
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),True)
 
     def test_len_of_word_out_of_board_x(self):
         board = Board()
         word = 'facultad'
         location = (10,5)
-        orientation = 'H'
+        orientation = True
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
 
     def test_len_of_word_out_of_board_y(self):
         board = Board()
         word = 'facultad'
         location = (5,10)
-        orientation ='V'
+        orientation = False
         self.assertEqual(board.validate_len_of_word_in_board(word,location,orientation),False)
 
     def test_validate_word_in_board_horizontal(self):
         board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (7,4)
-        orientation = 'H'
+        orientation = True
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
 
     def test_validate_word_in_board_vertical(self):
         board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (4,7)
-        orientation = 'V'
+        orientation = False
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
 
     def test_not_validate_word_in_board_horizontal(self):
         board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (5,8)
-        orientation = 'H'
+        orientation = True
         self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
 
     def test_not_validate_word_in_board_vertical(self):
         board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (8,5)
-        orientation = 'V'
+        orientation = False
         self.assertEqual(board.validate_init_of_game(word,location,orientation),False)
 
     def test_not_empty(self):
         board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (6,7)
-        orientation = 'V'
+        orientation = False
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
         
 
@@ -144,36 +145,37 @@ class TestBoard(unittest.TestCase):
         board.grid[7][10].letter = Tile('a',1)
         word = [Tile('s',2),Tile('a',1),Tile('c',1),Tile('a',1)]
         location = (7,7)
-        orientation = 'H'
+        orientation = True
         self.assertEqual(board.validate_init_of_game(word,location,orientation),True)
 
-    def test_validate_word(self):
-        board=Board()
-        word = 'casa'
-        self.assertEqual(board.validate_word(word),True)
-
-    def test_validate_word_false(self):
-        board=Board()
-        word = 'asd'
-        self.assertEqual(board.validate_word(word),False)
+    @patch('game.board.dle.search_by_word')
+    def test_rae_search(self, mock_search_by_word):
+        board = Board()
+        valid_word = 'casa'
+        mock_search_by_word.return_value.title = 'casa | Definición | Diccionario de la lengua española | RAE - ASALE'
+        result1 = board.validate_word(valid_word)
+        mock_search_by_word.return_value.title = 'Diccionario de la lengua española | Edición del Tricentenario | RAE - ASALE'  
+        invalid_word = 'uasffho'
+        result2 = board.validate_word(invalid_word)
+        self.assertEqual(result1, True)
+        self.assertEqual(result2, False)
 
     def test_put_word(self):
         board=Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (7,7)
-        orientation = 'H'
+        orientation = True
         board.put_word(word,location,orientation)
         self.assertEqual(board.grid[7][7].letter.letter,'c')
         self.assertEqual(board.grid[7][8].letter.letter,'a')
         self.assertEqual(board.grid[7][9].letter.letter,'s')
         self.assertEqual(board.grid[7][10].letter.letter,'a')
-        
-
+    
     def test_put_word_vertical(self):
         board=Board()
         word = [Tile('f',1),Tile('a',1),Tile('c',2),Tile('u',1),Tile('l',1),Tile('t',1),Tile('a',1),Tile('d',1)]
         location = (7,7)
-        orientation = 'V'
+        orientation = False
         board.put_word(word,location,orientation)
         self.assertEqual(board.grid[7][7].letter.letter,'f')
         self.assertEqual(board.grid[8][7].letter.letter,'a')
@@ -191,11 +193,12 @@ class TestBoard(unittest.TestCase):
         board.grid[7][9].letter = Tile('S',2)
         board.grid[7][10].letter = Tile('A',1)
         board.grid[6][8].letter = Tile('L',1)
+        board.grid[7][8].letter = Tile('A',1)
         board.grid[8][8].letter = Tile('Z',1)
         board.grid[9][8].letter = Tile('O',1)
         word1 = 'lazo'
         location1 = (6,8)
-        orientation1 = 'V'
+        orientation1 = False
         self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),True)
 
     def test_validate_crossing_words_false(self):
@@ -206,8 +209,24 @@ class TestBoard(unittest.TestCase):
         board.grid[7][10].letter = Tile('A',1)
         word1 = 'faca'
         location1 = (5,8)
-        orientation1 = 'H'
+        orientation1 = True
         self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),False)
+
+    def test_put_word_with_intersection(self):
+        board = Board()
+        board.grid[7][7].letter = Tile('C',1)
+        board.grid[7][8].letter = Tile('A',1)
+        board.grid[7][9].letter = Tile('S',2)
+        board.grid[7][10].letter = Tile('A',1)
+        word = [Tile('S',1)]
+        location = (7,7)
+        orientation = True
+        board.put_word(word,location,orientation)
+        self.assertEqual(board.grid[7][7].letter.letter,'C')
+        self.assertEqual(board.grid[7][8].letter.letter,'A')
+        self.assertEqual(board.grid[7][9].letter.letter,'S')
+        self.assertEqual(board.grid[7][10].letter.letter,'A')
+        self.assertEqual(board.grid[7][11].letter.letter,'S')
 
     def test_remove_accent(self):
         board=Board()
@@ -219,13 +238,17 @@ class TestBoard(unittest.TestCase):
         word = 'papa'
         self.assertEqual(board.remove_accent(word),'papa')
 
-    # def test_calculate_score_with_multipliers(self):
-    #     board=Board()
-    #     word = 'casa'
-    #     location = (7,7)
-    #     orientation = 'H'
-    #     board.put_word(word,location,orientation)
-    #     self.assertEqual(board.calculate_word_value(word,location,orientation),12)
+    def test_get_word_tithout_intersection(self):
+        board=Board()
+        board.grid[7][7].letter = Tile('C',1)
+        board.grid[7][8].letter = Tile('A',1)
+        board.grid[7][9].letter = Tile('S',2)
+        board.grid[7][10].letter = Tile('A',1)
+        word = 'faca'
+        location = (6,8)
+        orientation = False
+        self.assertEqual(board.get_word_without_intersections(word,location,orientation),'fca')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -27,16 +27,25 @@ class TestGameInitialization(unittest.TestCase):
         scrabble_game.current_player = scrabble_game.players[2]
         scrabble_game.next_turn()
         self.assertEqual (scrabble_game.current_player, scrabble_game.players[0])
-    
-    def test_validate_word(self):
-        scrabble_game = ScrabbleGame(players_count=3)
-        self.assertEqual(scrabble_game.validate_word('facultad'), True)
-        self.assertEqual(scrabble_game.validate_word('facultad1'), False)
+
 
     def test_show_board(self):
         scrabble_game = ScrabbleGame(players_count=3)
         self.assertEqual(scrabble_game.show_board(), scrabble_game.board.__repr__)
 
+    @patch('game.board.Board.validate_word', return_value=True)
+    def test_validate_all(self,mock_validate_word):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.players[0].tiles = [Tile('C',1),Tile('A',1),Tile('S',1),Tile('A',1)]
+        self.assertEqual(scrabble_game.validate_all('CASA',(7,7),True), True)
+
+    @patch('game.board.Board.validate_word', return_value=True)
+    def test_validate_initial_word(self,mock_validate_word):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.players[0].tiles = [Tile('C',1),Tile('A',1),Tile('S',1),Tile('A',1)]
+        self.assertEqual(scrabble_game.validate_initial_word('CASA',(7,7),True), True)
 
     @patch('game.tilebag.TileBag.draw_tiles')
     def test_change_tiles(self, mock_take_tiles):
