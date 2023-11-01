@@ -137,6 +137,34 @@ class TestBoard(unittest.TestCase):
         self.maxDiff = None
         self.assertEqual(result, expected)
 
+    def test_show_board_with_word_2(self):
+        board = Board()
+        board.grid[7][7].letter = 'CH'
+        board.grid[7][8].letter = 'O'
+        board.grid[7][9].letter = 'Z'
+        board.grid[7][10].letter = 'A'
+        result = board.show_board()
+        expected = '''       
+     A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
+  0  3W|   |   | 2L|   |   |   | 3W|   |   |   | 2L|   |   | 3W| 
+  1    | 2W|   |   |   | 3L|   |   |   | 3L|   |   |   | 2W|   | 
+  2    |   | 2W|   |   |   | 2L|   | 2L|   |   |   | 2W|   |   | 
+  3  2L|   |   | 2W|   |   |   | 2L|   |   |   | 2W|   |   | 2L| 
+  4    |   |   |   | 2W|   |   |   |   |   | 2W|   |   |   |   | 
+  5    | 3L|   |   |   | 3L|   |   |   | 3L|   |   |   | 3L|   | 
+  6    |   | 2L|   |   |   | 2L|   | 2L|   |   |   | 2L|   |   | 
+  7  3W|   |   | 2L|   |   |   | CH| O | Z | A | 2L|   |   | 3W| 
+  8    |   | 2L|   |   |   | 2L|   | 2L|   |   |   | 2L|   |   | 
+  9    | 3L|   |   |   | 3L|   |   |   | 3L|   |   |   | 3L|   | 
+  10   |   |   |   | 2W|   |   |   |   |   | 2W|   |   |   |   | 
+  11 2L|   |   | 2W|   |   |   | 2L|   |   |   | 2W|   |   | 2L| 
+  12   |   | 2W|   |   |   | 2L|   | 2L|   |   |   | 2W|   |   | 
+  13   | 2W|   |   |   | 3L|   |   |   | 3L|   |   |   | 2W|   | 
+  14 3W|   |   | 2L|   |   |   | 3W|   |   |   | 2L|   |   | 3W| 
+'''
+        self.maxDiff = None
+        self.assertEqual(result, expected)
+
     def test_show_overlapping_words(self):
         board=Board()
         board.grid[7][7].letter = Tile('c',1)
@@ -230,13 +258,13 @@ class TestBoard(unittest.TestCase):
 
     def test_remove_accent(self):
         board=Board()
-        word = 'papá'
-        self.assertEqual(board.remove_accent(word),'papa')
+        word = 'PAPÁ'
+        self.assertEqual(board.remove_accent(word),'PAPA')
 
     def test_remove_accent_false(self):
         board=Board()
-        word = 'papa'
-        self.assertEqual(board.remove_accent(word),'papa')
+        word = 'PAPA'
+        self.assertEqual(board.remove_accent(word),'PAPA')
 
     def test_get_word_tithout_intersection(self):
         board=Board()

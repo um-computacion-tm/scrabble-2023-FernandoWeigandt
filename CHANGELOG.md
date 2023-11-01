@@ -12,6 +12,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Development.
 
+## (0.1.7) V 31-10-23
+
+### Added
+
+- Add Some Tests of Main Menu method in Scrabble Game Class.
+- Add Validate Cross Words method in Board Class.
+- Add Test for Validate Cross Words method in Board Class.
+
+### Changed
+
+- Validate All methods in Board Class.
+- Test for Validate All methods in Board Class.
+
+### Issues
+
+- Calculated Points method in Board Class.
+
+
+
+
+## Status
+
+- Development.
+
 ## (0.1.6) V 25-10-23
 
 ### Added

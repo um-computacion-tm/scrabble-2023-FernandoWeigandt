@@ -44,3 +44,12 @@ class TestPlayer(unittest.TestCase):
         self.assertTrue(player.has_tiles('ABC'))
         self.assertFalse(player.has_tiles('ABD'))
 
+    def test_split_word(self):
+        player = Player('Fernando',0,0,TileBag())
+        self.assertEqual(player.split_word('CH'),['CH'])
+        self.assertEqual(player.split_word('LL'),['LL'])
+        self.assertEqual(player.split_word('RR'),['RR'])
+        self.assertEqual(player.split_word('CHLLRR'),['CH','LL','RR'])
+
+        
+
