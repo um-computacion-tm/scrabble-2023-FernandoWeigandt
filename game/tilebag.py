@@ -17,6 +17,9 @@ class Tile:
         self.letter = letter
         self.value = value
 
+    def __repr__(self):
+        return self.letter
+
 class JokerTile(Tile):
     
     def __init__(self, letter, value):
@@ -63,3 +66,8 @@ class TileBag:
 
     def tiles_remaining(self):
         return len(self.tiles)
+    
+    def shuffle(self):
+        random.shuffle(self.tiles)
+        return self.tiles
+    

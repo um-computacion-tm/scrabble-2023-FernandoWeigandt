@@ -12,6 +12,101 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Development.
 
+## (0.1.7) V 31-10-23
+
+### Added
+
+- Add Some Tests of Main Menu method in Scrabble Game Class.
+- Add Validate Cross Words method in Board Class.
+- Add Test for Validate Cross Words method in Board Class.
+
+### Changed
+
+- Validate All methods in Board Class.
+- Test for Validate All methods in Board Class.
+
+### Issues
+
+- Calculated Points method in Board Class.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.1.6) V 25-10-23
+
+### Added
+
+- Add Main Menu method in Scrabble Game Class.
+
+### Changed
+
+- Validate Cross Words method in Board Class.
+- Test for Validate Cross Words method in Board Class.
+- Change Tiles method in Scrabble Class.
+- Test for Change Tiles method in Scrabble Class.
+
+### Issues
+
+- Put word method in Board Class.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.1.5) V 14-10-23
+
+### Added
+
+- Remove accented letters method in Board Class.
+- Test for Remove accented letters method in Board Class.
+- Show Tile index and points method in Player Class.
+- Test for Show Tile index and points method in Player Class.
+
+### Changed
+
+- Show Board method in Board Class.
+- Test for Show Board method in Board Class.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
+
+## Status
+
+- Development.
+
+## (0.1.4) V 5-10-23
+
+### Added
+
+- Put word method in Board Class.
+- Test for Put word method in Board Class.
+
+### Changed
+
+- Nothing at the moment.
+
+### Issues
+
+- Nothing at the moment.
+
+
+
+
+## Status
+
+- Development.
+
 ## (0.1.3) V 04-10-23
 
 ### Added
@@ -28,6 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Test for Distribute Tiles method in Scrabble Game Class.
 
 ### Removed
+
 - Put word method in Board Class.
 - Test for Put word method in Board Class.
 

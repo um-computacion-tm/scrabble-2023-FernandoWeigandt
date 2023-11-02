@@ -10,6 +10,10 @@ class TestTiles(unittest.TestCase):
         self.assertEqual(tile.letter, 'A')
         self.assertEqual(tile.value, 1)
 
+    def test_repr(self):
+        tile = Tile('A', 1)
+        self.assertEqual(repr(tile), 'A')
+
 
 class TestJoker(unittest.TestCase):
 
@@ -57,3 +61,7 @@ class TestTileBag(unittest.TestCase):
         tilebag.put_tiles([Tile('A',1)])
         self.assertEqual(tilebag.tiles_remaining(),TOTALTILES)
         
+    def test_shuffle(self):
+        tilebag=TileBag()
+        tilebag.shuffle()
+        self.assertEqual(tilebag.tiles_remaining(),TOTALTILES)
