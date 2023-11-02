@@ -111,10 +111,10 @@ class TestBoard(unittest.TestCase):
     
     def test_show_board_with_word(self):
         board = Board()
-        board.grid[7][7].letter = 'C'
-        board.grid[7][8].letter = 'A'
-        board.grid[7][9].letter = 'S'
-        board.grid[7][10].letter = 'A'
+        board.grid[7][7].letter = Tile('C',1)
+        board.grid[7][8].letter = Tile('A',1)
+        board.grid[7][9].letter = Tile('S',2)
+        board.grid[7][10].letter = Tile('A',1)
         result = board.show_board()
         expected = '''       
      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
@@ -139,10 +139,10 @@ class TestBoard(unittest.TestCase):
 
     def test_show_board_with_word_2(self):
         board = Board()
-        board.grid[7][7].letter = 'CH'
-        board.grid[7][8].letter = 'O'
-        board.grid[7][9].letter = 'Z'
-        board.grid[7][10].letter = 'A'
+        board.grid[7][7].letter = Tile('CH',5)
+        board.grid[7][8].letter = Tile('O',1)
+        board.grid[7][9].letter = Tile('Z',1)
+        board.grid[7][10].letter = Tile('A',1)
         result = board.show_board()
         expected = '''       
      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
@@ -166,7 +166,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_show_overlapping_words(self):
-        board=Board()
+        board = Board()
         board.grid[7][7].letter = Tile('c',1)
         board.grid[7][8].letter = Tile('a',1)
         board.grid[7][9].letter = Tile('s',2)
@@ -189,7 +189,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(result2, False)
 
     def test_put_word(self):
-        board=Board()
+        board = Board()
         word = [Tile('c',1),Tile('a',1),Tile('s',2),Tile('a',1)]
         location = (7,7)
         orientation = True
@@ -200,7 +200,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[7][10].letter.letter,'a')
     
     def test_put_word_vertical(self):
-        board=Board()
+        board = Board()
         word = [Tile('f',1),Tile('a',1),Tile('c',2),Tile('u',1),Tile('l',1),Tile('t',1),Tile('a',1),Tile('d',1)]
         location = (7,7)
         orientation = False
@@ -215,7 +215,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[14][7].letter.letter,'d')
 
     def test_validate_crossing_words(self):
-        board=Board()
+        board = Board()
         board.grid[7][7].letter = Tile('C',1)
         board.grid[7][8].letter = Tile('A',1)
         board.grid[7][9].letter = Tile('S',2)
@@ -230,7 +230,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.validate_crossing_words(word1,location1,orientation1),True)
 
     def test_validate_crossing_words_false(self):
-        board=Board()
+        board = Board()
         board.grid[7][7].letter = Tile('C',1)
         board.grid[7][8].letter = Tile('A',1)
         board.grid[7][9].letter = Tile('S',2)
@@ -257,17 +257,17 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(board.grid[7][11].letter.letter,'S')
 
     def test_remove_accent(self):
-        board=Board()
+        board = Board()
         word = 'PAPÁ'
         self.assertEqual(board.remove_accent(word),'PAPA')
 
     def test_remove_accent_false(self):
-        board=Board()
+        board = Board()
         word = 'PAPA'
         self.assertEqual(board.remove_accent(word),'PAPA')
 
     def test_get_word_tithout_intersection(self):
-        board=Board()
+        board = Board()
         board.grid[7][7].letter = Tile('C',1)
         board.grid[7][8].letter = Tile('A',1)
         board.grid[7][9].letter = Tile('S',2)
@@ -276,7 +276,6 @@ class TestBoard(unittest.TestCase):
         location = (6,8)
         orientation = False
         self.assertEqual(board.get_word_without_intersections(word,location,orientation),'fca')
-
 
 if __name__ == '__main__':
     unittest.main()

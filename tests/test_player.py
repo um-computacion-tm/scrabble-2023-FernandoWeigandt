@@ -42,7 +42,12 @@ class TestPlayer(unittest.TestCase):
         tiles=[Tile('A',1),Tile('B',1),Tile('C',1)]
         player.add_tiles(tiles)
         self.assertTrue(player.has_tiles('ABC'))
-        self.assertFalse(player.has_tiles('ABD'))
+
+    def test_not_has_tiles(self):
+        player=Player('Fernando',0,0,TileBag())
+        tiles=[Tile('A',1),Tile('B',1),Tile('C',1),Tile('S',2)]
+        player.add_tiles(tiles)
+        self.assertFalse(player.has_tiles('CASA'))
 
     def test_split_word(self):
         player = Player('Fernando',0,0,TileBag())

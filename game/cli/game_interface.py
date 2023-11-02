@@ -1,5 +1,6 @@
 from game.scrabble_game import ScrabbleGame
 import os
+import ipdb
 
 class GameInterface:
 
@@ -13,7 +14,6 @@ class GameInterface:
             player.add_tiles(self.scrabble.tilebag.draw_tiles(7))
             i += 1
         self.scrabble.next_turn()
-        self.play()
 
     def add_players(self):
         try:
@@ -21,7 +21,7 @@ class GameInterface:
             return number_of_players if (number_of_players > 1 and number_of_players) < 4 else ValueError
         except:
             print('Ingrese un número de jugadores válido')
-            self.add_players()
+            return self.add_players()
 
     def play(self):
         board = self.scrabble.board
@@ -41,10 +41,11 @@ class GameInterface:
                 print('4. Si posee comodín, ingrese la letra que desea que represente')
                 print('5. Terminar juego')
                 option = str(input())
+                flag = True
                 if option == '1':
                     self.play_turn()
                 elif option == '2':
-                    self.change_tiles()
+                    flag = self.change_tiles()
                 elif option == '3':
                     pass
                 elif option == '4':
@@ -57,28 +58,32 @@ class GameInterface:
                     return
                 else:
                     print('Ingrese una opción válida')
-                    self.play()
-
+                    flag = False
 
                 print('Presione enter para continuar')
                 input()
-                self.scrabble.next_turn()
+                if flag:
+                    self.scrabble.next_turn()
                 os.system('clear')
                 
-
-
-            
-    
     def play_turn(self):
         print('Ingrese la palabra que desea jugar con sus fichas o 5 para salir:')
         print(self.scrabble.current_player.show_tiles())
-        word = input().lower()
+        word = str(input()).lower()
         if word == '5':
             return 
         print('Ingrese la coordenada de la fila')
-        row = int(input())
+        try:
+            row = int(input())
+        except:
+            print('Ingrese una coordenada válida')
+            self.play_turn()
         print('Ingrese la coordenada de la columna')
-        column = int(input())
+        try:
+            column = int(input())
+        except:
+            print('Ingrese una coordenada válida')
+            self.play_turn()
         location = (row,column)
         print('Ingrese la orientación en la que desea jugar la palabra')
         print('1. Horizontal')
@@ -92,6 +97,7 @@ class GameInterface:
                 self.scrabble.board.put_word(tiles,location,orientation)
                 self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                 print(self.scrabble.board.show_board())
+
             elif self.scrabble.current_player.has_tiles(word) == False:
                 print('Usted no tiene las fichas para jugar esa palabra')
                 self.play_turn()
@@ -116,12 +122,15 @@ class GameInterface:
             else:
                 print('La palabra no es válida')
                 self.play_turn()
+            
 
     def change_tiles(self):
         print(f'{self.scrabble.current_player.name} Estas son sus fichas:')
         print(self.scrabble.current_player.show_tiles())
-        print('Ingrese las posicion de las fichas que desea cambiar')
+        print('Ingrese las posicion de las fichas que desea cambiar o 8 para salir')
         positions = input()
+        if positions == '8':
+            return False
         positions = positions.split(',')
         positions = [int(position) for position in positions]
         new_tiles = self.scrabble.tilebag.draw_tiles(len(positions))
@@ -132,10 +141,13 @@ class GameInterface:
         print(self.scrabble.current_player.show_tiles())
         print('Presione enter para continuar')
         input()
+        return True
 
     def select_letter(self):
-        print('Ingrese la letra que desea que represente el comodín')
+        print('Ingrese la letra que desea que represente el comodín o enter para salir')
         letter = input()
+        if letter == '\n':
+            return
         for tile in self.scrabble.current_player.tiles:
             if tile.letter == '_':
                 tile.letter = letter.upper()
@@ -150,3 +162,4 @@ class GameInterface:
 
 if __name__ == '__main__':
     game = GameInterface()
+    game.play()

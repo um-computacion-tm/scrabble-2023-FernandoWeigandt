@@ -88,7 +88,7 @@ class Board():
                     else:
                         view += '  | '
 
-                elif len(cell.letter) == 2:
+                elif len(cell.letter.letter) == 2:
                     view += f'{cell.letter}| '
                 else:
                     view += f'{cell.letter} | '
