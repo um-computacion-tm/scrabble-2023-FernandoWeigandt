@@ -14,10 +14,10 @@ class ScrabbleGame:
         self.round = 0
 
     def next_turn(self):
-        self.round += 1
         if self.current_player == None:
             self.current_player = self.players[0]
         elif self.current_player == self.players[-1]:
+            self.round += 1
             self.current_player = self.players[0]
         else:
             index=self.players.index(self.current_player)+1
@@ -43,3 +43,14 @@ class ScrabbleGame:
         self.tilebag.put_tiles(old_tiles)
         return old_tiles
     
+    def end_game(self):
+        if self.tilebag.tiles == []:
+            for player in self.players:
+                if player.tiles == []:
+                    return True
+                else:
+                    return False
+        elif self.players[0].surrender == 3:
+            return True
+        else:
+            return False

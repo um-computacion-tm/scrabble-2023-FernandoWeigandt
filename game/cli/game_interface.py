@@ -25,9 +25,11 @@ class GameInterface:
 
     def play(self):
         board = self.scrabble.board
-        while True:
+        while not self.end_game():
             for i in range(len(self.scrabble.players)):
                 current_player = self.scrabble.current_player
+                if self.scrabble.current_player.surrender == 3:
+                    return
                 print(f'Es el turno de {current_player.name}')
                 print(f'La Ronda es: {self.scrabble.round}')
                 print('El tablero es:')
@@ -42,36 +44,39 @@ class GameInterface:
                 print('5. Terminar juego')
                 option = str(input())
                 flag = True
-                if option == '1':
-                    self.play_turn()
-                elif option == '2':
-                    flag = self.change_tiles()
-                elif option == '3':
-                    pass
-                elif option == '4':
-                    self.select_letter()
-                elif option == '5':
-                    print('Gracias por jugar')
-                    print('Los puntajes son:')
-                    for player in self.scrabble.players:
-                        print(f'{player.name}: {player.score}')
-                    return
-                else:
-                    print('Ingrese una opción válida')
-                    flag = False
+                self.handle_option(option,flag)
 
-                print('Presione enter para continuar')
-                input()
-                if flag:
-                    self.scrabble.next_turn()
-                os.system('clear')
+    def handle_option(self, option,flag):
+            if option == '1':
+                self.play_turn()
+            elif option == '2':
+                flag = self.change_tiles()
+            elif option == '3':
+                self.scrabble.current_player.surrender += 1
+                pass
+            elif option == '4':
+                self.select_letter()
+            elif option == '5':
+                self.scrabble.tilebag.tiles = []
+                for player in self.scrabble.players:
+                    player.tiles = []   
+                self.end_game()
+            else:
+                print('Ingrese una opción válida')
+                flag = False
+
+            print('Presione enter para continuar')
+            input()
+            if flag:
+                self.scrabble.next_turn()
+            os.system('clear')
                 
     def play_turn(self):
         print('Ingrese la palabra que desea jugar con sus fichas o 5 para salir:')
         print(self.scrabble.current_player.show_tiles())
         word = str(input()).lower()
         if word == '5':
-            return 
+            return self.play()
         print('Ingrese la coordenada de la fila')
         try:
             row = int(input())
@@ -90,6 +95,9 @@ class GameInterface:
         print('2. Vertical')
         orientation = input()
         orientation = orientation == '1'
+        self.put_word(word,location,orientation)
+
+    def put_word(self, word, location, orientation):
         if self.scrabble.board.is_empty():
             if self.scrabble.validate_initial_word(word,location,orientation):
                 word = self.scrabble.board.remove_accent(word)
@@ -97,7 +105,6 @@ class GameInterface:
                 self.scrabble.board.put_word(tiles,location,orientation)
                 self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                 print(self.scrabble.board.show_board())
-
             elif self.scrabble.current_player.has_tiles(word) == False:
                 print('Usted no tiene las fichas para jugar esa palabra')
                 self.play_turn()
@@ -116,6 +123,9 @@ class GameInterface:
                     self.scrabble.board.put_word(tiles,location,orientation)
                     self.scrabble.current_player.add_tiles(self.scrabble.tilebag.draw_tiles(7-len(self.scrabble.current_player.tiles)))
                     print(self.scrabble.board.show_board())
+                else:
+                    print('Usted no tiene las fichas para jugar esa palabra')
+                    self.play_turn()
             elif self.scrabble.board.validate_len_of_word_in_board(word,location,orientation) == False:
                 print('La palabra no se puede jugar en esa posición ')
                 self.play_turn()
@@ -130,6 +140,7 @@ class GameInterface:
         print('Ingrese las posicion de las fichas que desea cambiar o 8 para salir')
         positions = input()
         if positions == '8':
+            self.play()
             return False
         positions = positions.split(',')
         positions = [int(position) for position in positions]
@@ -147,7 +158,7 @@ class GameInterface:
         print('Ingrese la letra que desea que represente el comodín o enter para salir')
         letter = input()
         if letter == '\n':
-            return
+            return self.play()
         for tile in self.scrabble.current_player.tiles:
             if tile.letter == '_':
                 tile.letter = letter.upper()
@@ -156,6 +167,15 @@ class GameInterface:
                 print('Presione enter para continuar')
                 input()
                 return
+            
+    def end_game(self):
+        if self.scrabble.end_game():
+            print('Gracias por jugar')
+            print('Los puntajes son:')
+            for player in self.scrabble.players:
+                print(f'{player.name}: {player.score}')
+            return True
+
 
     
 

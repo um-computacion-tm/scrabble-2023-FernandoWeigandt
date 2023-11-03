@@ -62,6 +62,31 @@ class TestGameInitialization(unittest.TestCase):
         self.assertEqual(scrabble.players[0].tiles, expected)
         self.assertEqual(len(scrabble.tilebag.tiles), initial_value)
 
+    def test_end_game(self):
+        scrabble = ScrabbleGame(2)
+        scrabble.current_player = scrabble.players[0]
+        scrabble.current_player.surrender = 3
+        self.assertEqual(scrabble.end_game(), True)
+
+    def test_end_game_if_tilebag_is_empty(self):
+        scrabble = ScrabbleGame(2)
+        scrabble.current_player = scrabble.players[0]
+        scrabble.tilebag.tiles = []
+        self.assertEqual(scrabble.end_game(), True)
+    
+    def test_end_game_false(self):
+        scrabble = ScrabbleGame(2)
+        scrabble.current_player = scrabble.players[0]
+        scrabble.tilebag.tiles = []
+        scrabble.current_player.tiles = [Tile('A',1)]
+        self.assertEqual(scrabble.end_game(), False)
+
+    def test_end_game_false_2(self):
+        scrabble = ScrabbleGame(2)
+        scrabble.current_player = scrabble.players[0]
+        scrabble.tilebag.tiles = [Tile('A',1)]
+        scrabble.current_player.tiles = [Tile('A',1)]
+        self.assertEqual(scrabble.end_game(), False)
 
 
 

@@ -277,5 +277,12 @@ class TestBoard(unittest.TestCase):
         orientation = False
         self.assertEqual(board.get_word_without_intersections(word,location,orientation),'fca')
 
+    # def test_calculate_word_value(self):
+    #     board = Board()
+    #     word = 'faca'
+    #     location = (7,7)
+    #     orientation = False
+    #     self.assertEqual(board.calculate_word_value_with_cell(word,location,orientation),18)
+
 if __name__ == '__main__':
     unittest.main()

@@ -16,14 +16,17 @@ class Board():
         LETTER_MULTIPLIERS = ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9),(0, 3), (0, 11), (2, 6), (2, 8), (3, 0), (3, 7), (3, 14), (6, 2), (6, 6), (6, 8), (6, 12), (7, 3), (7, 11), (8, 2), (8, 6), (8, 8), (8, 12), (11, 0), (11, 7), (11, 14), (12, 6), (12, 8), (14, 3), (14, 11))
         for row in range(len(self.grid)):
             for col in range(len(self.grid[row])):
-                if (row, col) in LETTER_MULTIPLIERS:
-                    multiplier=3 if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)) else 2
-                    self.grid[row][col] = Cell(multiplier, 'letter', '', True)
-                elif (row, col) in WORD_MULTIPLIERS:
-                    multiplier = 3 if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)) else 2
-                    self.grid[row][col] = Cell(multiplier, 'word', '', True)
-                else:
-                    self.grid[row][col] = Cell(1, '', '', False)
+                self.validate_multiplier(row, col, WORD_MULTIPLIERS, LETTER_MULTIPLIERS)
+
+    def validate_multiplier(self, row, col, WORD_MULTIPLIERS, LETTER_MULTIPLIERS):
+        if (row, col) in LETTER_MULTIPLIERS:
+            multiplier=3 if (row, col) in ((1, 5), (1, 9), (5, 1), (5, 5), (5, 9), (5, 13), (9, 1), (9, 5), (9, 9), (9, 13), (13, 5), (13, 9)) else 2
+            self.grid[row][col] = Cell(multiplier, 'letter', '', True)
+        elif (row, col) in WORD_MULTIPLIERS:
+            multiplier = 3 if (row, col) in ((0, 0), (7, 0), (0, 7), (0, 14), (7, 14), (14, 0), (14, 7), (14, 14)) else 2
+            self.grid[row][col] = Cell(multiplier, 'word', '', True)
+        else:
+            self.grid[row][col] = Cell(1, '', '', False)
     
 
     def is_empty(self):
@@ -87,7 +90,6 @@ class Board():
                         view += f'{cell.multiplier}L| '
                     else:
                         view += '  | '
-
                 elif len(cell.letter.letter) == 2:
                     view += f'{cell.letter}| '
                 else:
@@ -96,13 +98,13 @@ class Board():
         return view
 
         
-    def put_word(self,word,pos,horizontal):
+    def put_word(self,word,location,orientation):
         j=0
         for i in range(len(word)):
-            cell = self.grid[pos[0]][pos[1]+i+j] if horizontal else self.grid[pos[0]+i+j][pos[1]]
+            cell = self.grid[location[0]][location[1]+i+j] if orientation else self.grid[location[0]+i+j][location[1]]
             while cell.letter:
                 j+=1
-                cell = self.grid[pos[0]][pos[1]+i+j] if horizontal else self.grid[pos[0]+i+j][pos[1]]
+                cell = self.grid[location[0]][location[1]+i+j] if orientation else self.grid[location[0]+i+j][location[1]]
             cell.letter = word[i]
 
 
@@ -114,10 +116,10 @@ class Board():
         word = word.replace('Ú','U')
         return word
     
-    def get_word_without_intersections(self,word,pos,horizontal):
+    def get_word_without_intersections(self,word,location,orientation):
         result = ''
         for i in range(len(word)):
-            cell = self.grid[pos[0] + (i if not horizontal else 0)][pos[1] + (i if horizontal else 0)].letter
+            cell = self.grid[location[0] + (i if not orientation else 0)][location[1] + (i if orientation else 0)].letter
             if not cell:
                 result += word[i]
         return result
