@@ -28,8 +28,6 @@ class GameInterface:
         while not self.end_game():
             for i in range(len(self.scrabble.players)):
                 current_player = self.scrabble.current_player
-                if self.scrabble.current_player.surrender == 3:
-                    return
                 print(f'Es el turno de {current_player.name}')
                 print(f'La Ronda es: {self.scrabble.round}')
                 print('El tablero es:')
