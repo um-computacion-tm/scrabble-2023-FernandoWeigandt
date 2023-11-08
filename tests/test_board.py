@@ -1,7 +1,6 @@
 import unittest
 from game.board import *
 from unittest.mock import patch
-import ipdb
 
 class TestBoard(unittest.TestCase):
     def test_init(self):
