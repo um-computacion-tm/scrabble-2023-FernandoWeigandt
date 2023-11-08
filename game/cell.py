@@ -3,6 +3,7 @@ class Cell:
         self.multiplier = multiplier
         self.multiplier_type = multiplier_type
         self.letter=None
+        self.active = True
         
 
     def add_letter(self, tile):

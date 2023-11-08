@@ -1,10 +1,12 @@
 
 class Player:
     def __init__(self,name='',number=0,score=0,bag_tiles=None):
-        self.name=name
-        self.number=number
-        self.score=score
-        self.tiles=[]
+        self.name = name
+        self.number = number
+        self.score = score
+        self.tiles = []
+        self.surrender = 0
+
 
     def add_tiles(self,tiles):
         self.tiles.extend(tiles)
@@ -27,11 +29,20 @@ class Player:
         return tiles
         
     def has_tiles(self,word):
+        lectern = self.tiles.copy()
+        cont=0
         word = self.split_word(word)
         for letter in word:
-            if letter.upper() not in self.show_tiles():
-                return False
-        return True
+            for tile in lectern:
+                if tile.letter == letter.upper():
+                    lectern.remove(tile)
+                    cont+=1
+                    break
+        if cont == len(word):
+            return True
+        else:
+            return False
+
     
     def split_word(self,word):
         word = word.upper()
