@@ -10,6 +10,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Status
 
+- Released
+
+## (1.0.0) V 08-10-23
+
+### Added
+
+- Add play method in Scrabble Game Class.
+
+### Changed
+
+- Refactor play in Game Interface.
+- Refactor validate word in Board Class.
+
+### Deleted
+
+- Validate all and Validate initial Word in Scrabble Class.
+
+
+
+
+## Status
+
 - Development.
 
 ## (0.1.7) V 31-10-23

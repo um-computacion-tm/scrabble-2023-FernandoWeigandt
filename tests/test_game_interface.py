@@ -2,7 +2,7 @@ from unittest.mock import patch
 from game.cli.game_interface import *
 from game.tilebag import Tile
 import unittest
-import ipdb, io, sys
+import io, sys
 
 class TestGameInterface(unittest.TestCase):
 
@@ -54,7 +54,9 @@ class TestGameInterface(unittest.TestCase):
         printed_output = output_buffer.getvalue()
         output_buffer.close()
         expected = '''Es el turno de first
-La Ronda es: 0
+La Ronda es: 1
+Las fichas restantes son: 86
+Los puntos de first son: 0
 El tablero es:
        
      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
@@ -82,13 +84,11 @@ Ingrese el numero de la opción que desea realizar
 3. Pasar turno
 4. Si posee comodín, ingrese la letra que desea que represente
 5. Terminar juego
-Gracias por jugar
-Los puntajes son:
-first: 0
-second: 0
 Presione enter para continuar
 Es el turno de second
-La Ronda es: 0
+La Ronda es: 1
+Las fichas restantes son: 0
+Los puntos de second son: 0
 El tablero es:
        
      A   B   C   D   E   F   G   H   I   J   K   L   M   N   O  
@@ -116,10 +116,6 @@ Ingrese el numero de la opción que desea realizar
 3. Pasar turno
 4. Si posee comodín, ingrese la letra que desea que represente
 5. Terminar juego
-Gracias por jugar
-Los puntajes son:
-first: 0
-second: 0
 Presione enter para continuar
 Gracias por jugar
 Los puntajes son:
@@ -129,7 +125,7 @@ second: 0
         self.maxDiff = None
         self.assertEqual(printed_output, expected)
 
-    @patch('builtins.input', side_effect=[2,'first','second'])
+    @patch('builtins.input', side_effect=[2,'first','second','\n'])
     def test_handle_option_1(self, mock_init_input):
         output_buffer = io.StringIO()
         sys.stdout = output_buffer
@@ -140,7 +136,7 @@ second: 0
         sys.stdout = sys.__stdout__
         output_buffer.close()
 
-    @patch('builtins.input', side_effect=[2,'first','second'])
+    @patch('builtins.input', side_effect=[2,'first','second','\n'])
     def test_handle_option_2(self, mock_init_input):
         output_buffer = io.StringIO()
         sys.stdout = output_buffer
@@ -151,7 +147,7 @@ second: 0
         sys.stdout = sys.__stdout__
         output_buffer.close()
 
-    @patch('builtins.input', side_effect=[2,'first','second'])
+    @patch('builtins.input', side_effect=[2,'first','second','\n'])
     def test_handle_option_3(self, mock_init_input):
         output_buffer = io.StringIO()
         sys.stdout = output_buffer
@@ -161,7 +157,7 @@ second: 0
         output_buffer.close()
         self.assertEqual(game_interface.scrabble.players[0].surrender, 1)
 
-    @patch('builtins.input', side_effect=[2,'first','second'])
+    @patch('builtins.input', side_effect=[2,'first','second','\n'])
     def test_handle_option_4(self, mock_init_input):
         output_buffer = io.StringIO()
         sys.stdout = output_buffer
@@ -172,7 +168,7 @@ second: 0
         sys.stdout = sys.__stdout__
         output_buffer.close()
 
-    @patch('builtins.input', side_effect=[2,'first','second'])
+    @patch('builtins.input', side_effect=[2,'first','second','\n'])
     def test_handle_option_invalid(self, mock_init_input):
         output_buffer = io.StringIO()
         sys.stdout = output_buffer
@@ -190,3 +186,35 @@ second: 0
         game_interface.play_turn()
         sys.stdout = sys.__stdout__
         output_buffer.close()
+
+    @patch('builtins.input', side_effect=[2,'first','second','5','\n'])
+    def test_play_turn_cancel(self, mock_init_input):
+        output_buffer = io.StringIO()
+        sys.stdout = output_buffer
+        game_interface = GameInterface()
+        game_interface.scrabble.current_player.tiles=[Tile('S',1),Tile('O',1),Tile('P',1),Tile('A',1),Tile('S',1),Tile('S',1),Tile('S',1)]
+        result = game_interface.play_turn()
+        sys.stdout = sys.__stdout__
+        output_buffer.close()
+        self.assertEqual(result, False)
+
+    @patch('builtins.input', side_effect=[2,'first','second','sopa','a',7,'sopa',7,'a','sopa',7,7,'1','\n'])
+    def test_play_turn_try_invalid_options(self, mock_init_input):
+        output_buffer = io.StringIO()
+        sys.stdout = output_buffer
+        game_interface = GameInterface()
+        game_interface.scrabble.current_player.tiles=[Tile('S',1),Tile('O',1),Tile('P',1),Tile('A',1),Tile('S',1),Tile('S',1),Tile('S',1)]
+        game_interface.play_turn()
+        sys.stdout = sys.__stdout__
+        output_buffer.close()
+
+    # @patch('builtins.input', side_effect=[2,'first','second','sopa',7,7,'1','\n'])
+    # @patch()
+    # def test_put_word(self, mock_init_input):
+    #     output_buffer = io.StringIO()
+    #     sys.stdout = output_buffer
+    #     game_interface = GameInterface()
+    #     game_interface.scrabble.current_player.tiles=[Tile('S',1),Tile('O',1),Tile('P',1),Tile('A',1),Tile('S',1),Tile('S',1),Tile('S',1)]
+    #     game_interface.put_word('casa',(7,7),True)
+    #     sys.stdout = sys.__stdout__
+    #     output_buffer.close()
